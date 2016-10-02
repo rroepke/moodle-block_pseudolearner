@@ -17,11 +17,10 @@
 /**
  * Version details
  *
- * @package    block_pseudolearner
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package block_pseudolearner
+ * @author Rene Roepke
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2016100202;        // The current plugin version (Date: YYYYMMDDXX)

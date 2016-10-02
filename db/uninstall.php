@@ -17,10 +17,11 @@
 /**
  * @see uninstall_plugin()
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package block_pseudolearner
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 /**
  * Custom uninstallation procedure
  */

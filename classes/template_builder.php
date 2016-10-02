@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class block_pseudolearner_template_builder
+ * Class blocks_pseudolearner_template_builder
  *
  * @package block_pseudolearner
  * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class blocks_pseudolearner_template_builder {
+class block_pseudolearner_template_builder {
 
     /** @var string This is the path for the template file which is used */
     private $path;

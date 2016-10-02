@@ -17,11 +17,13 @@
 /**
  * Upgrade function for database changes
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package block_pseudolearner
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die ();
+
 /**
  * Execute groupformation upgrade from the given old version
  *

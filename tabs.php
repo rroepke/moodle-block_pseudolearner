@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * prints the tabbed bar
+ * Prints the tabbed bar
  *
- * @package blocks_pseudolearner
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package block_pseudolearner
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
  */
 defined('MOODLE_INTERNAL') or die ('not allowed');
 

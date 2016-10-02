@@ -33,7 +33,7 @@ class block_pseudolearner_content_controller {
                 $content->footer = "<a href=\"".$this->get_link("config_view")."\"><button>CONFIGURE ME</button></a>";
             }
         } else {
-            if ($instance = $this->get_instance()){
+            if (!$instance = $this->get_instance()){
                 $content->text = "Not configured yet. Come back later when the teacher of this course finished the configuration of this block.";
             } else {
                 $content->text = "cannot edit settings & has instance";

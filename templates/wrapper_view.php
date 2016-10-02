@@ -13,18 +13,26 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version details
- *
- * @package    block_pseudolearner
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package block_pseudolearner
+ * @author Rene Roepke
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+?>
 
-defined('MOODLE_INTERNAL') || die();
+<link href="styles.css" rel="stylesheet">
+<div class="pl_settings_pad">
+    <div class="pl_pad_header">
+        <?php echo "Overview"; ?>
+    </div>
+    <div class="pl_pad_content">
+        <?php echo $this->_['analysis_status_template']; ?>
+    </div>
 
-$plugin->version   = 2016100202;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_pseudolearner'; // Full name of the plugin (used for diagnostics)
-$plugin->cron = 300;
+    <div class="pl_pad_header_small">
+        <?php echo "Current status"; ?>
+    </div>
+    <div class="pl_pad_content">
+        <?php // echo $this->_['analysis_statistics_template']; ?>
+    </div>
+</div>

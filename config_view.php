@@ -8,11 +8,15 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/config_controller.php');
 
-$courseid = required_param('id', PARAM_INT);
+$id = required_param('id', PARAM_INT);
+
+$courseid = $id;
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
 }
+
+require_course_login($course);
 
 $userid = $USER->id;
 $context = context_course::instance($courseid);
@@ -22,7 +26,18 @@ if (!has_capability('moodle/block:edit',$context,$userid)){
     redirect($url);
 }
 
-require_course_login($course);
+$controller = new block_pseudolearner_config_controller($courseid,$context);
+
+if ((data_submitted()) && confirm_sesskey()) {
+    $save = optional_param('save', false, PARAM_BOOL);
+
+    if ($save) {
+        $controller->save();
+    }
+
+    $url = new moodle_url('/course/view.php',array('id'=>$courseid));
+    redirect($url);
+}
 
 $PAGE->set_url('/blocks/pseudolearner/config_view.php');
 $PAGE->set_title(format_string("test"));
@@ -31,8 +46,6 @@ $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();
 
-$controller = new block_pseudolearner_config_controller($courseid,$context);
-
-$controller->render();
+echo $controller->render();
 
 echo $OUTPUT->footer();

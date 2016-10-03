@@ -22,7 +22,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-class block_pseudolearner_instance {
+class block_pseudolearner_instance_controller {
 
     private $courseid;
 

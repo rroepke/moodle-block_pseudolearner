@@ -22,7 +22,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/instance.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/instance_controller.php');
 
 
 class block_pseudolearner_config_controller {
@@ -33,7 +33,7 @@ class block_pseudolearner_config_controller {
     public function __construct($courseid, $context) {
         $this->courseid = $courseid;
         $this->context = $context;
-        $this->instance = new block_pseudolearner_instance($courseid);
+        $this->instance = new block_pseudolearner_instance_controller($courseid);
     }
 
     public function render() {

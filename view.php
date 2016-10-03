@@ -36,16 +36,16 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$controller = new block_pseudolearner_view_controller($courseid, $context);
+$controller = new block_pseudolearner_view_controller($courseid, $userid, $context);
 
 if (data_submitted() && confirm_sesskey()) {
 
-    $withdrawconsent = optional_param('withdrawconsent', false, PARAM_BOOL);
+    $consent = optional_param('consent', null, PARAM_TEXT);
     $pseudonym = optional_param('pseudonym', false, PARAM_BOOL);
     $courses = optional_param('courses', false, PARAM_BOOL);
 
-    if ($withdrawconsent) {
-        $controller->withdraw_consent();
+    if (!is_null($consent)) {
+        $controller->set_consent($consent);
     }
 
     if ($pseudonym) {
@@ -58,6 +58,8 @@ if (data_submitted() && confirm_sesskey()) {
         redirect($url);
     }
 
+    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
+    redirect($url);
 }
 
 $PAGE->set_url('/blocks/pseudolearner/view.php');

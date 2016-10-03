@@ -123,5 +123,21 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100300, 'pseudolearner');
     }
 
+    if ($oldversion < 2016100301) {
+
+        // Define field consent to be added to block_pseudolearner_u_course.
+        $table = new xmldb_table('block_pseudolearner_u_course');
+        $field = new xmldb_field('consent', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'courseid');
+
+        // Conditionally launch add field consent.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016100301, 'pseudolearner');
+    }
+
+
     return true;
 }

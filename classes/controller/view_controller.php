@@ -23,17 +23,23 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_course_controller.php');
 
 class block_pseudolearner_view_controller {
 
     private $courseid = null;
+    private $userid = null;
     private $context = null;
     private $view = null;
+    private $user_course_controller = null;
 
-    public function __construct($courseid, $context) {
+    public function __construct($courseid, $userid, $context) {
         $this->courseid = $courseid;
+        $this->userid = $userid;
         $this->context = $context;
         $this->view = new block_pseudolearner_template_builder();
+        $this->user_course_controller = new block_pseudolearner_user_course_controller($userid,$this->courseid);
+
     }
 
     public function get_instance() {
@@ -94,11 +100,13 @@ class block_pseudolearner_view_controller {
 
         $state = 1;
 
+        $consentaction = $this->user_course_controller->get_consent() ? 'withdraw' : 'give';
+
         switch ($state) {
             case 1:
-                $button = array('caption' => 'Withdraw consent',
-                    'value'=> 1,
-                    'name' => 'withdrawconsent',
+                $button = array('caption' => $consentaction.' consent', // TODO fix caption and description
+                    'value'=> $consentaction,
+                    'name' => 'consent',
                     'description' => 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.'
                 );
                 $buttons[] = $button;
@@ -127,7 +135,11 @@ class block_pseudolearner_view_controller {
         return $overviewoptions->load_template();
     }
 
-    public function withdraw_consent() {
-        var_dump("hallo2");
+    public function set_consent($consent) {
+        if ($consent == 'withdraw') {
+            $this->user_course_controller->set_consent(false);
+        } else if ($consent == 'give') {
+            $this->user_course_controller->set_consent(true);
+        }
     }
 }

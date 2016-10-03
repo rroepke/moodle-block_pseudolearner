@@ -28,18 +28,18 @@ require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/content_c
 
 class block_pseudolearner extends block_base {
 
-    function init() {
+    public function init() {
         $this->title = get_string('pluginname', 'block_pseudolearner');
     }
 
-    function instance_delete() {
+    public function instance_delete() {
         global $DB;
         $courseid = $this->page->course->id;
         $DB->delete_records('pseudolearner', array('courseid' => $courseid));
         return true;
     }
 
-    function instance_create() {
+    public function instance_create() {
         global $DB;
         $courseid = $this->page->course->id;
         $record = new stdClass();
@@ -48,7 +48,7 @@ class block_pseudolearner extends block_base {
         return true;
     }
 
-    function get_content() {
+    public function get_content() {
         global $USER;
 
         if ($this->content !== null) {
@@ -90,14 +90,13 @@ class block_pseudolearner extends block_base {
         return $this->content;
     }
 
-    // my moodle can only have SITEID and it's redundant here, so take it away
     public function applicable_formats() {
         return array('all' => false,
                      'site' => true,
                      'site-index' => true,
-                     'course-view' => true, 
+                     'course-view' => true,
                      'course-view-social' => false,
-                     'mod' => true, 
+                     'mod' => true,
                      'mod-quiz' => false);
     }
 
@@ -105,13 +104,13 @@ class block_pseudolearner extends block_base {
           return false;
     }
 
-    function has_config() {
-        return true;
+    public function has_config() {
+        return false;
     }
 
     public function cron() {
         mtrace( "Hey, my cron script is running" );
-        // do something.
+        // Do something.
         return true;
     }
 }

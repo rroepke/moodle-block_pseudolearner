@@ -35,10 +35,10 @@ class block_pseudolearner_content_controller {
     public function get_instance() {
         global $DB;
 
-        return $DB->get_record("pseudolearner", array("courseid" => $this->courseid));
+        return $DB->get_record("block_pseudolearner", array("courseid" => $this->courseid));
     }
 
-    public function get_content(){
+    public function get_content() {
         $content = new stdClass();
         if (has_capability('moodle/block:edit', $this->context)) {
             if (!$instance = $this->get_instance()) {
@@ -49,7 +49,7 @@ class block_pseudolearner_content_controller {
             }
         } else {
             if (!$instance = $this->get_instance()) {
-                $content->text = "Not configured yet. Come back later when the teacher of this course finished the configuration of this block.";
+                $content->text = "Not configured yet.";
             } else {
                 $content->text = "cannot edit settings & has instance";
                 $content->footer = "<a href=\"" . $this->get_link("view") . "\"><button>MANAGE</button></a>";

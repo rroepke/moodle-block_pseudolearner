@@ -74,20 +74,6 @@ class block_pseudolearner_view_controller {
 
         $this->view->assign('analysis_status_template', $template);
 
-//        echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
-//
-//        echo '<input type="hidden" name="id" value="' . $this->courseid . '"/>';
-//        echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-//
-//        echo "view controller render";
-//
-//        echo "<br>";
-//
-//        echo "<button type=\"submit\" name=\"save\" value=\"1\">".get_string("submit")."</button>";
-//        echo "<button type=\"submit\" name=\"save\" value=\"0\">".get_string("cancel")."</button>";
-//
-//        echo '</form>';
-
         echo $this->view->load_template();
     }
 }

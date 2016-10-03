@@ -33,6 +33,5 @@
         <?php echo "Current status"; ?>
     </div>
     <div class="pl_pad_content">
-        <?php // echo $this->_['analysis_statistics_template']; ?>
     </div>
 </div>

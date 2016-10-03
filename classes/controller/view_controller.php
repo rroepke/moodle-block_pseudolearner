@@ -36,10 +36,10 @@ class block_pseudolearner_view_controller {
         $this->view = new block_pseudolearner_template_builder();
     }
 
-    public function get_instance(){
+    public function get_instance() {
         global $DB;
 
-        return $DB->get_record("pseudolearner",array("courseid"=>$this->courseid));
+        return $DB->get_record('pseudolearner', array('courseid' => $this->courseid));
     }
 
     public function render() {
@@ -54,9 +54,9 @@ class block_pseudolearner_view_controller {
 
         $buttonvalue = 1;
 
-        $analysisstatustemplate = new block_pseudolearner_template_builder();
-        $analysisstatustemplate->set_template('analysis_status');
-        $analysisstatustemplate->assign('button',
+        $firsttemplate = new block_pseudolearner_template_builder();
+        $firsttemplate->set_template('analysis_status');
+        $firsttemplate->assign('button',
             array(
                 'type' => 'submit',
                 'name' => 'questionnaire_switcher',
@@ -65,12 +65,12 @@ class block_pseudolearner_view_controller {
                 'text' => $buttoncaption
             )
         );
-        $analysisstatustemplate->assign('info_teacher', "blub1");
-        $analysisstatustemplate->assign('analysis_time_start', $this->starttime);
-        $analysisstatustemplate->assign('analysis_time_end', $this->endtime);
-        $analysisstatustemplate->assign('analysis_status_info', "blub2");
+        $firsttemplate->assign('info_teacher', "blub1");
+        $firsttemplate->assign('analysis_time_start', $this->starttime);
+        $firsttemplate->assign('analysis_time_end', $this->endtime);
+        $firsttemplate->assign('analysis_status_info', "blub2");
 
-        $template = $analysisstatustemplate->load_template();
+        $template = $firsttemplate->load_template();
 
         $this->view->assign('analysis_status_template', $template);
 

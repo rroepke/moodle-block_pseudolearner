@@ -45,7 +45,7 @@ echo $OUTPUT->header();
 
 require('tabs.php');
 
-$controller = new block_pseudolearner_view_controller($courseid,$context);
+$controller = new block_pseudolearner_view_controller($courseid, $context);
 
 $controller->render();
 

@@ -99,7 +99,29 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100201, 'pseudolearner');
     }
 
+    if ($oldversion < 2016100300) {
 
+        // Define table pseudolearner to be renamed to block_pseudolearner.
+        $table = new xmldb_table('pseudolearner');
+
+        // Launch rename table for pseudolearner.
+        $dbman->rename_table($table, 'block_pseudolearner');
+
+        // Define table pseudolearner_user to be renamed to block_pseudolearner_user.
+        $table = new xmldb_table('pseudolearner_user');
+
+        // Launch rename table for pseudolearner_user.
+        $dbman->rename_table($table, 'block_pseudolearner_user');
+
+        // Define table pseudolearner_user_course to be renamed to block_pseudolearner_u_coursee.
+        $table = new xmldb_table('pseudolearner_user_course');
+
+        // Launch rename table for pseudolearner_user_course.
+        $dbman->rename_table($table, 'block_pseudolearner_u_course');
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016100300, 'pseudolearner');
+    }
 
     return true;
 }

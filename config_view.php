@@ -36,12 +36,12 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-if (!has_capability('moodle/block:edit',$context,$userid)){
-    $url = new moodle_url('/course/view.php',array('id'=>$courseid));
+if (!has_capability('moodle/block:edit', $context, $userid)){
+    $url = new moodle_url('/course/view.php', array('id' => $courseid));
     redirect($url);
 }
 
-$controller = new block_pseudolearner_config_controller($courseid,$context);
+$controller = new block_pseudolearner_config_controller($courseid, $context);
 
 if ((data_submitted()) && confirm_sesskey()) {
     $save = optional_param('save', false, PARAM_BOOL);
@@ -50,7 +50,7 @@ if ((data_submitted()) && confirm_sesskey()) {
         $controller->save();
     }
 
-    $url = new moodle_url('/course/view.php',array('id'=>$courseid));
+    $url = new moodle_url('/course/view.php', array('id' => $courseid));
     redirect($url);
 }
 

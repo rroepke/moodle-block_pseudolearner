@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Version details.
  *
  * @package block_pseudolearner
  * @author Rene Roepke
@@ -23,7 +23,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016100202;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2012112900;        // Requires this Moodle version
-$plugin->component = 'block_pseudolearner'; // Full name of the plugin (used for diagnostics)
+$plugin->version   = 2016100300;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2012112900;        // Requires this Moodle version.
+$plugin->component = 'block_pseudolearner'; // Full name of the plugin (used for diagnostics).
 $plugin->cron = 300;

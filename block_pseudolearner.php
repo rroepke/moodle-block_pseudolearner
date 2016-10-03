@@ -35,7 +35,7 @@ class block_pseudolearner extends block_base {
     function instance_delete() {
         global $DB;
         $courseid = $this->page->course->id;
-        $DB->delete_records('pseudolearner',array('courseid'=>$courseid));
+        $DB->delete_records('pseudolearner', array('courseid' => $courseid));
         return true;
     }
 
@@ -44,12 +44,12 @@ class block_pseudolearner extends block_base {
         $courseid = $this->page->course->id;
         $record = new stdClass();
         $record->courseid = $courseid;
-        $DB->insert_record('pseudolearner',$record);
+        $DB->insert_record('pseudolearner', $record);
         return true;
     }
 
     function get_content() {
-        global $CFG, $OUTPUT, $USER;
+        global $USER;
 
         if ($this->content !== null) {
             return $this->content;
@@ -65,7 +65,7 @@ class block_pseudolearner extends block_base {
         $this->content->icons = array();
         $this->content->footer = '';
 
-        // user/index.php expect course context, so get one if page has module context.
+        // User/index.php expect course context, so get one if page has module context.
         $currentcontext = $this->page->context->get_course_context(false);
 
         if (! empty($this->config->text)) {
@@ -105,13 +105,13 @@ class block_pseudolearner extends block_base {
           return false;
     }
 
-    function has_config() {return true;}
+    function has_config() {
+        return true;
+    }
 
     public function cron() {
-            mtrace( "Hey, my cron script is running" );
-             
-                 // do something
-                  
-                      return true;
+        mtrace( "Hey, my cron script is running" );
+        // do something.
+        return true;
     }
 }

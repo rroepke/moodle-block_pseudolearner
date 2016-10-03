@@ -44,6 +44,17 @@ class block_pseudolearner_view_controller {
 
     public function render() {
         $this->view->set_template('wrapper_view');
+
+        $template = $this->render_status();
+        $this->view->assign('analysis_status_template', $template);
+
+        $template = $this->render_options();
+        $this->view->assign('overview_options_template', $template);
+
+        echo $this->view->load_template();
+    }
+
+    public function render_status() {
         $this->starttime = 123;
 
         $this->endtime = 456;
@@ -55,7 +66,7 @@ class block_pseudolearner_view_controller {
         $buttonvalue = 1;
 
         $firsttemplate = new block_pseudolearner_template_builder();
-        $firsttemplate->set_template('analysis_status');
+        $firsttemplate->set_template('overview_status');
         $firsttemplate->assign('button',
             array(
                 'type' => 'submit',
@@ -65,15 +76,58 @@ class block_pseudolearner_view_controller {
                 'text' => $buttoncaption
             )
         );
+
         $firsttemplate->assign('info_teacher', "blub1");
         $firsttemplate->assign('analysis_time_start', $this->starttime);
         $firsttemplate->assign('analysis_time_end', $this->endtime);
         $firsttemplate->assign('analysis_status_info', "blub2");
 
-        $template = $firsttemplate->load_template();
+        return $firsttemplate->load_template();
+    }
 
-        $this->view->assign('analysis_status_template', $template);
+    public function render_options() {
+        $overviewoptions = new block_pseudolearner_template_builder();
+        $overviewoptions->set_template('overview_options');
+        $overviewoptions->assign('id',$this->courseid);
 
-        echo $this->view->load_template();
+        $buttons = array();
+
+        $state = 1;
+
+        switch ($state) {
+            case 1:
+                $button = array('caption' => 'Withdraw consent',
+                    'value'=> 1,
+                    'name' => 'withdrawconsent',
+                    'description' => 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.'
+                );
+                $buttons[] = $button;
+
+                $button = array('caption' => 'View pseudonym',
+                    'value'=> 1,
+                    'name' => 'pseudonym',
+                    'description' => 'Click here to see more details about your registered pseudonym in Moodle.'
+                );
+                $buttons[] = $button;
+
+                $button = array('caption' => 'View courses',
+                    'value'=> 1,
+                    'name' => 'courses',
+                    'description' => 'Click here to see an overview about all courses and their current tracking status.'
+                );
+                $buttons[] = $button;
+                break;
+            default:
+                break;
+
+        }
+
+        $overviewoptions->assign('buttons', $buttons);
+
+        return $overviewoptions->load_template();
+    }
+
+    public function withdraw_consent() {
+        var_dump("hallo2");
     }
 }

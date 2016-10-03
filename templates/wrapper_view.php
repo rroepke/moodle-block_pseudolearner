@@ -30,8 +30,9 @@
     </div>
 
     <div class="pl_pad_header_small">
-        <?php echo "Current status"; ?>
+        <?php echo "Options"; ?>
     </div>
     <div class="pl_pad_content">
+        <?php echo $this->_['overview_options_template']; ?>
     </div>
 </div>

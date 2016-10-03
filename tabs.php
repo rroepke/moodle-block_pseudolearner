@@ -35,14 +35,14 @@ $viewurl = new moodle_url ('/blocks/pseudolearner/view.php', array(
 $row [] = new tabobject ('view', $viewurl->out(), "overview");
 
 // The view -> student mode.
-$viewurl = new moodle_url ('/blocks/pseudolearner/view.php', array(
-    'id' => $courseid, 'show' => 'pseudonym_view'));
-$row [] = new tabobject ('pseudonym_view', $viewurl->out(), "pseudonym_view");
+$viewurl = new moodle_url ('/blocks/pseudolearner/pseudonym_view.php', array(
+    'id' => $courseid, 'show' => 'pseudonym'));
+$row [] = new tabobject ('pseudonym', $viewurl->out(), "pseudonym_view");
 
 // The view -> student mode.
-$viewurl = new moodle_url ('/blocks/pseudolearner/view.php', array(
-    'id' => $courseid, 'show' => 'courses_view'));
-$row [] = new tabobject ('courses_view', $viewurl->out(), "courses_view");
+$viewurl = new moodle_url ('/blocks/pseudolearner/courses_view.php', array(
+    'id' => $courseid, 'show' => 'courses'));
+$row [] = new tabobject ('courses', $viewurl->out(), "courses_view");
 
 if (count($row) >= 1) {
     $tabs [] = $row;

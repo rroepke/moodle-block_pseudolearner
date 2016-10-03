@@ -40,29 +40,11 @@ $controller = new block_pseudolearner_view_controller($courseid, $context);
 
 if (data_submitted() && confirm_sesskey()) {
 
-    $withdrawconsent = optional_param('withdrawconsent', false, PARAM_BOOL);
-    $pseudonym = optional_param('pseudonym', false, PARAM_BOOL);
-    $courses = optional_param('courses', false, PARAM_BOOL);
-
-    if ($withdrawconsent) {
-        $controller->withdraw_consent();
-    }
-
-    if ($pseudonym) {
-        $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym'));
-        redirect($url);
-    }
-
-    if ($courses) {
-        $url = new moodle_url('courses_view.php', array('id' => $courseid, 'show' => 'courses'));
-        redirect($url);
-    }
-
 }
 
-$PAGE->set_url('/blocks/pseudolearner/view.php');
-$PAGE->set_title(format_string("test"));
-$PAGE->set_heading(format_string("test123"));
+$PAGE->set_url('/blocks/pseudolearner/courses_view.php');
+$PAGE->set_title(format_string("courses_view"));
+$PAGE->set_heading(format_string("courses_view"));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();

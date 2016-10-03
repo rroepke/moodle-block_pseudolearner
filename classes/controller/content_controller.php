@@ -61,7 +61,7 @@ class block_pseudolearner_content_controller {
 
     public function get_link($page) {
         $url = new moodle_url("/blocks/pseudolearner/" . $page . ".php",
-            array("id" => $this->courseid));
+            array("id" => $this->courseid, 'show' => 'view'));
         return $url->out();
     }
 }

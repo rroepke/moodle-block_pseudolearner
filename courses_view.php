@@ -36,7 +36,7 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$controller = new block_pseudolearner_view_controller($courseid, $context);
+$controller = new block_pseudolearner_view_controller($courseid, $userid, $context);
 
 if (data_submitted() && confirm_sesskey()) {
 

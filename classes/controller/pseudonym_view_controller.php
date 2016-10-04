@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 
-class block_pseudolearner_view_controller {
+class block_pseudolearner_pseudonym_view_controller {
 
     private $courseid = null;
     private $userid = null;
@@ -38,7 +38,7 @@ class block_pseudolearner_view_controller {
         $this->userid = $userid;
         $this->context = $context;
         $this->view = new block_pseudolearner_template_builder();
-        $this->user_controller = new block_pseudolearner_user_controller($userid, $courseid);
+        $this->user_controller = new block_pseudolearner_user_controller($userid);
     }
 
     public function get_instance() {
@@ -104,26 +104,19 @@ class block_pseudolearner_view_controller {
         if ($registered) {
 
             // pseudonym registered
-            $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description
-                'value' => $consentaction,
-                'name' => 'consent',
-                'description' => 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.'
+            $button = array('caption' => 'Delete pseudonym', // TODO fix caption and description
+                'value' => 1,
+                'name' => 'delete',
+                'description' => 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.'
             );
             $buttons[] = $button;
 
-            $button = array('caption' => 'View pseudonym',
-                'value' => 1,
-                'name' => 'pseudonym',
-                'description' => 'Click here to see more details about your registered pseudonym in Moodle.'
-            );
-            $buttons[] = $button;
-
-            $button = array('caption' => 'View courses',
-                'value' => 1,
-                'name' => 'courses',
-                'description' => 'Click here to see an overview about all courses and their current tracking status.'
-            );
-            $buttons[] = $button;
+//            $button = array('caption' => 'View courses',
+//                'value' => 1,
+//                'name' => 'courses',
+//                'description' => 'Click here to see an overview about all courses and their current tracking status.'
+//            );
+//            $buttons[] = $button;
 
         } else {
 
@@ -137,16 +130,19 @@ class block_pseudolearner_view_controller {
 
         }
 
+        $url = new moodle_url('view.php', array('id' => $this->courseid, 'show' => 'view'));
+
         $overviewoptions->assign('buttons', $buttons);
+        $overviewoptions->assign('go_back', $url->out());
 
         return $overviewoptions->load_template();
     }
 
-    public function set_consent($consent) {
-        if ($consent == 'withdraw') {
-            $this->user_controller->set_consent(false);
-        } else if ($consent == 'give') {
-            $this->user_controller->set_consent(true);
-        }
+    public function delete_pseudonym() {
+        $this->user_controller->delete_pseudonym();
+    }
+
+    public function register_pseudonym() {
+        $this->user_controller->register_pseudonym();
     }
 }

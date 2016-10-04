@@ -622,7 +622,7 @@
 
 .path-blocks-pseudolearner .pl_pad_content {
     background-color: whitesmoke;
-    padding: 1em 1.6em 2em; }
+    padding: 1em 1.6em 1em; }
 @media (max-width: 48em) {
     .path-blocks-pseudolearner .pl_pad_content {
         padding: 1em 1em 1em; } }

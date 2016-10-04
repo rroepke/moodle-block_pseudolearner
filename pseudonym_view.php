@@ -23,7 +23,7 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/view_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/pseudonym_view_controller.php');
 
 $courseid = required_param('id', PARAM_INT);
 
@@ -36,10 +36,33 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$controller = new block_pseudolearner_view_controller($courseid, $context);
+$controller = new block_pseudolearner_pseudonym_view_controller($courseid, $userid, $context);
 
 if (data_submitted() && confirm_sesskey()) {
 
+    $register = optional_param('register', false, PARAM_BOOL);
+    $delete = optional_param('delete', false, PARAM_BOOL);
+    $courses = optional_param('courses', false, PARAM_BOOL);
+
+    if ($register) {
+        // TODO enable when implemented
+        // $url = new moodle_url('register_view.php', array('id' => $courseid));
+        // redirect($url);
+        // TODO disable when implemented above
+        $controller->register_pseudonym();
+    }
+
+    if ($delete) {
+        $controller->delete_pseudonym();
+    }
+
+    if ($courses) {
+        $url = new moodle_url('courses_view.php', array('id' => $courseid, 'show' => 'courses'));
+        redirect($url);
+    }
+
+    $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym'));
+    redirect($url);
 }
 
 $PAGE->set_url('/blocks/pseudolearner/pseudonym_view.php');

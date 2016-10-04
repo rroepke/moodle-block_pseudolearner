@@ -43,4 +43,9 @@
 
         <?php endforeach; ?>
     </form>
+    <div class="col_m_100 bp_align_left-middle">
+        <?php if (array_key_exists('go_back',$this->_)): ?>
+            <?php echo "Go back to " . "<a href=\"".$this->_['go_back']."\">"."overview"."</a>"; ?>
+        <?php endif; ?>
+    </div>
 </div>

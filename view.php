@@ -41,11 +41,21 @@ $controller = new block_pseudolearner_view_controller($courseid, $userid, $conte
 if (data_submitted() && confirm_sesskey()) {
 
     $consent = optional_param('consent', null, PARAM_TEXT);
+    $register = optional_param('register', false, PARAM_BOOL);
     $pseudonym = optional_param('pseudonym', false, PARAM_BOOL);
     $courses = optional_param('courses', false, PARAM_BOOL);
 
     if (!is_null($consent)) {
         $controller->set_consent($consent);
+    }
+
+    if ($register) {
+        // TODO enable when implemented
+        // $url = new moodle_url('register_view.php', array('id' => $courseid));
+        // redirect($url);
+        // TODO disable when implemented above
+        $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym'));
+        redirect($url);
     }
 
     if ($pseudonym) {

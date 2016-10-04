@@ -138,6 +138,22 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100301, 'pseudolearner');
     }
 
+    if ($oldversion < 2016100400) {
+
+        // Define field registered to be added to block_pseudolearner_user.
+        $table = new xmldb_table('block_pseudolearner_user');
+        $field = new xmldb_field('registered', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'userid');
+
+        // Conditionally launch add field registered.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016100400, 'pseudolearner');
+    }
+
+
 
     return true;
 }

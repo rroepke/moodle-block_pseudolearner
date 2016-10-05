@@ -20,12 +20,15 @@
  */
 ?>
 
-<link href="styles.css" rel="stylesheet">
-<div class="pl_settings_pad">
-    <div class="pl_pad_header">
-        <?php echo $this->_['title']; ?>
+<div class="pl_pad_header_small">
+    <?php echo "Other Courses"; ?>
+</div>
+<div class="pl_pad_content">
+    <div class="grid">
+        <form action="<?php echo htmlspecialchars($_SERVER ["PHP_SELF"]); ?>" method="post" autocomplete="off">
+            <input type="hidden" name="id" value="<?php echo $this->_['id']; ?>"/>
+            <input type="hidden" name="sesskey" value="<?php echo sesskey(); ?>"/>
+            <input type="hidden" name="show" value="view"/>
+        </form>
     </div>
-    <?php foreach ($this->_['templates'] as $template): ?>
-        <?php echo $template; ?>
-    <?php endforeach; ?>
 </div>

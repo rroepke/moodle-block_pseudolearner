@@ -135,8 +135,9 @@ class block_pseudolearner_user_controller {
                     'courseid' => ((is_null($courseid)) ? $this->courseid : $courseid)
                 )
             );
+        } else {
+            return false;
         }
-        return false;
     }
 
     public function set_consent($consent, $courseid = null) {

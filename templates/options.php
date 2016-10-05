@@ -19,33 +19,32 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<div class="grid">
-    <form action="<?php echo htmlspecialchars($_SERVER ["PHP_SELF"]); ?>" method="post" autocomplete="off">
-        <input type="hidden" name="id" value="<?php echo $this->_['id']; ?>"/>
-        <input type="hidden" name="sesskey" value="<?php echo sesskey(); ?>" />
-        <input type="hidden" name="show" value="view" />
-        <?php foreach($this->_['buttons'] as $button): ?>
-            <div class="grid bottom_stripe">
-                <div class="col_m_33 bp_align_left-middle">
-                    <button
-                        type="submit"
-                        name="<?php echo $button['name']; ?>"
-                        value="<?php echo $button['value']; ?>"
-                        class="pl_button pl_button_pill pl_button_large"
-                    >
-                        <?php echo $button['caption']; ?>
-                    </button>
+<div class="pl_pad_header_small">
+    <?php echo "Options"; ?>
+</div>
+<div class="pl_pad_content">
+    <div class="grid">
+        <form action="<?php echo htmlspecialchars($_SERVER ["PHP_SELF"]); ?>" method="post" autocomplete="off">
+            <input type="hidden" name="id" value="<?php echo $this->_['id']; ?>"/>
+            <input type="hidden" name="sesskey" value="<?php echo sesskey(); ?>"/>
+            <input type="hidden" name="show" value="view"/>
+            <?php foreach ($this->_['buttons'] as $button): ?>
+                <div class="grid bottom_stripe">
+                    <div class="col_m_33 bp_align_left-middle">
+                        <button
+                            type="submit"
+                            name="<?php echo $button['name']; ?>"
+                            value="<?php echo $button['value']; ?>"
+                            class="pl_button pl_button_pill pl_button_large"
+                        >
+                            <?php echo $button['caption']; ?>
+                        </button>
+                    </div>
+                    <div class="col_m_66">
+                        <?php echo $button['description']; ?>
+                    </div>
                 </div>
-                <div class="col_m_66">
-                    <?php echo $button['description']; ?>
-                </div>
-            </div>
-
-        <?php endforeach; ?>
-    </form>
-    <div class="col_m_100 bp_align_left-middle">
-        <?php if (array_key_exists('go_back',$this->_)): ?>
-            <?php echo "Go back to " . "<a href=\"".$this->_['go_back']."\">"."overview"."</a>"; ?>
-        <?php endif; ?>
+            <?php endforeach; ?>
+        </form>
     </div>
 </div>

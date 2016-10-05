@@ -24,7 +24,8 @@ defined('MOODLE_INTERNAL') or die ('not allowed');
 
 $tabs = array();
 $row = array();
-$inactive = array();
+
+$inactive = ($user_controller->is_registered())?array():array('pseudonym','courses');
 $activated = array();
 
 $currenttab = optional_param('show', null, PARAM_TEXT);

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * View
+ * Pseudonym view
  *
  * @package block_pseudolearner
  * @author Rene Roepke
@@ -23,9 +23,12 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/pseudonym_view_controller.php');
 
 $courseid = required_param('id', PARAM_INT);
+$file = basename(__FILE__, '.php');
+$show = optional_param('show',$file,PARAM_TEXT);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
@@ -36,28 +39,19 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$controller = new block_pseudolearner_pseudonym_view_controller($courseid, $userid, $context);
+$user_controller = new block_pseudolearner_user_controller($userid, $courseid);
+$controller = new block_pseudolearner_pseudonym_view_controller($courseid, $user_controller);
 
+require('navigation.php');
+
+// Handle submitted values and perform fitting actions
 if (data_submitted() && confirm_sesskey()) {
-
     $register = optional_param('register', false, PARAM_BOOL);
     $delete = optional_param('delete', false, PARAM_BOOL);
-    $courses = optional_param('courses', false, PARAM_BOOL);
-
-    if ($register) {
-        // TODO enable when implemented
-        // $url = new moodle_url('register_view.php', array('id' => $courseid));
-        // redirect($url);
-        // TODO disable when implemented above
-        $controller->register_pseudonym();
-    }
 
     if ($delete) {
-        $controller->delete_pseudonym();
-    }
-
-    if ($courses) {
-        $url = new moodle_url('courses_view.php', array('id' => $courseid, 'show' => 'courses'));
+        $user_controller->delete_pseudonym();
+        $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
         redirect($url);
     }
 
@@ -66,14 +60,14 @@ if (data_submitted() && confirm_sesskey()) {
 }
 
 $PAGE->set_url('/blocks/pseudolearner/pseudonym_view.php');
-$PAGE->set_title(format_string("test"));
-$PAGE->set_heading(format_string("test123"));
+$PAGE->set_title(format_string($file));
+$PAGE->set_heading(format_string($file));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();
 
 require('tabs.php');
 
-$controller->render();
+echo $controller->render();
 
 echo $OUTPUT->footer();

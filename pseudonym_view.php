@@ -24,11 +24,11 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/pseudonym_view_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/pseudonym_view_controller.php');
 
 $courseid = required_param('id', PARAM_INT);
 $file = basename(__FILE__, '.php');
-$show = optional_param('show',$file,PARAM_TEXT);
+$show = optional_param('show', $file, PARAM_TEXT);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
@@ -39,18 +39,18 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$user_controller = new block_pseudolearner_user_controller($userid, $courseid);
-$controller = new block_pseudolearner_pseudonym_view_controller($courseid, $user_controller);
+$usercontroller = new block_pseudolearner_user_controller($userid, $courseid);
+$controller = new block_pseudolearner_pseudonym_view_controller($courseid, $usercontroller);
 
 require('navigation.php');
 
-// Handle submitted values and perform fitting actions
+// Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
     $register = optional_param('register', false, PARAM_BOOL);
     $delete = optional_param('delete', false, PARAM_BOOL);
 
     if ($delete) {
-        $user_controller->delete_pseudonym();
+        $usercontroller->delete_pseudonym();
         $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
         redirect($url);
     }

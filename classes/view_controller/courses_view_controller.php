@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class block_pseudolearner_view_controller
+ * Class block_pseudolearner_courses_view_controller
  *
  * @package block_pseudolearner
  * @author Rene Roepke
@@ -23,15 +23,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/basic_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/basic_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 
-class block_pseudolearner_view_controller extends block_pseudolearner_basic_controller {
+class block_pseudolearner_courses_view_controller extends block_pseudolearner_basic_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('status','options');
+    protected $templatenames = array('status', 'options', 'courselist');
     /** @var string Title of page */
-    protected $title = 'Overview';
+    protected $title = 'Courses';
 
     /**
      * Returns all option buttons.
@@ -41,41 +41,17 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
     public function get_option_buttons() {
         $buttons = array();
 
-        $registered = $this->user_controller->is_registered();
+        $registered = $this->usercontroller->is_registered();
 
-        $consentaction = $this->user_controller->get_consent() ? 'withdraw' : 'give';
+        $consentaction = $this->usercontroller->get_consent() ? 'withdraw' : 'give';
 
         if ($registered) {
 
-            // pseudonym registered
-            $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description
+            // Pseudonym registered.
+            $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description.
                 'value' => $consentaction,
                 'name' => 'consent',
                 'description' => 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.'
-            );
-            $buttons[] = $button;
-
-            $button = array('caption' => 'View pseudonym',
-                'value' => 1,
-                'name' => 'pseudonym',
-                'description' => 'Click here to see more details about your registered pseudonym in Moodle.'
-            );
-            $buttons[] = $button;
-
-            $button = array('caption' => 'View courses',
-                'value' => 1,
-                'name' => 'courses',
-                'description' => 'Click here to see an overview about all courses and their current tracking status.'
-            );
-            $buttons[] = $button;
-
-        } else {
-
-            // no pseudonym registered
-            $button = array('caption' => 'Register pseudonym',
-                'value' => 1,
-                'name' => 'register',
-                'description' => 'Click here to register a pseudonym which can be used for tracking your learning data.'
             );
             $buttons[] = $button;
 
@@ -118,5 +94,18 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
         $firsttemplate->assign('analysis_status_info', "blub2");
 
         return $firsttemplate->load_template();
+    }
+
+    /**
+     * Render 'courses' template.
+     *
+     * @return string
+     */
+    public function render_courselist() {
+        $overviewoptions = new block_pseudolearner_template_builder();
+        $overviewoptions->set_template('courselist');
+        $overviewoptions->assign('id', $this->courseid);
+
+        return $overviewoptions->load_template();
     }
 }

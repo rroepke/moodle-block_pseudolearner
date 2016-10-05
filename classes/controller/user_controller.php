@@ -98,7 +98,7 @@ class block_pseudolearner_user_controller {
     }
 
     public function delete_pseudonym() {
-        // TODO handle pseudonym deletion
+        // TODO handle pseudonym deletion.
 
         $this->withdraw_consent_for_all();
 
@@ -106,7 +106,7 @@ class block_pseudolearner_user_controller {
     }
 
     public function register_pseudonym() {
-        // TODO handle pseudonym registration
+        // TODO handle pseudonym registration.
 
         $this->set_registered(true);
     }

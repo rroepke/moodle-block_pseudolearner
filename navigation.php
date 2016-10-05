@@ -23,13 +23,13 @@
 defined('MOODLE_INTERNAL') or die ('not allowed');
 
 // Exclude users with editing rights (teacher, manager etc.) and redirect to course page.
-if (has_capability('moodle/block:edit',$context)) {
+if (has_capability('moodle/block:edit', $context)) {
     $url = new moodle_url('/course/view.php', array('id' => $courseid));
     redirect($url);
 }
 
 // Check if pseudonym is not registered and file is not 'view' to redirect to 'view' page.
-if (!$user_controller->is_registered() && $file != 'view') {
+if (!$usercontroller->is_registered() && $file != 'view') {
     $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
     redirect($url);
 }

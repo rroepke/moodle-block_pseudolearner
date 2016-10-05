@@ -36,7 +36,7 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
 
     if ($oldversion < 2016093000) {
 
-        // Rename field course on table pseudolearner to NEWNAMEGOESHERE.
+        // Rename field course on table pseudolearner to courseid.
         $table = new xmldb_table('pseudolearner');
         $field = new xmldb_field('course', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'id');
 

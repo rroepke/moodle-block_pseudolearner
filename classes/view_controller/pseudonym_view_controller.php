@@ -23,13 +23,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/basic_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/basic_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 
 class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_basic_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('status','options');
+    protected $templatenames = array('status', 'options');
     /** @var string Title of page */
     protected $title = 'Pseudonym';
 
@@ -41,11 +41,11 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
     public function get_option_buttons() {
         $buttons = array();
 
-        $registered = $this->user_controller->is_registered();
+        $registered = $this->usercontroller->is_registered();
 
         if ($registered) {
-            // pseudonym registered
-            $button = array('caption' => 'Delete pseudonym', // TODO fix caption and description
+            // Pseudonym registered
+            $button = array('caption' => 'Delete pseudonym',
                 'value' => 1,
                 'name' => 'delete',
                 'description' => 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.'

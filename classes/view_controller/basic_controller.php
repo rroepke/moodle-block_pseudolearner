@@ -30,7 +30,7 @@ abstract class block_pseudolearner_basic_controller {
     /** @var int ID of the course */
     protected $courseid = null;
     /** @var block_pseudolearner_user_controller Controller instance for user */
-    protected $user_controller = null;
+    protected $usercontroller = null;
 
     /** @var block_pseudolearner_template_builder View builder */
     protected $view = null;
@@ -45,11 +45,11 @@ abstract class block_pseudolearner_basic_controller {
      * block_pseudolearner_basic_controller constructor.
      *
      * @param $courseid
-     * @param $user_controller
+     * @param $usercontroller
      */
-    public function __construct($courseid, $user_controller) {
+    public function __construct($courseid, $usercontroller) {
         $this->courseid = $courseid;
-        $this->user_controller = $user_controller;
+        $this->usercontroller = $usercontroller;
         $this->view = new block_pseudolearner_template_builder();
         $this->view->set_template('wrapper_view');
     }
@@ -61,7 +61,7 @@ abstract class block_pseudolearner_basic_controller {
      */
     public function render() {
 
-        $this->view->assign('title',$this->title);
+        $this->view->assign('title', $this->title);
 
         $templates = array();
 
@@ -71,7 +71,7 @@ abstract class block_pseudolearner_basic_controller {
             $templates[$templatename . '_template'] = $template;
         }
 
-        $this->view->assign('templates',$templates);
+        $this->view->assign('templates', $templates);
 
         return $this->view->load_template();
     }
@@ -84,7 +84,7 @@ abstract class block_pseudolearner_basic_controller {
     public function render_options() {
         $overviewoptions = new block_pseudolearner_template_builder();
         $overviewoptions->set_template('options');
-        $overviewoptions->assign('id',$this->courseid);
+        $overviewoptions->assign('id', $this->courseid);
 
         $buttons = $this->get_option_buttons();
 

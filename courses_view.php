@@ -23,12 +23,12 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/courses_view_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/courses_view_controller.php');
 
 $courseid = required_param('id', PARAM_INT);
 $file = basename(__FILE__, '.php');
-$show = optional_param('show',$file,PARAM_TEXT);
+$show = optional_param('show', $file, PARAM_TEXT);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
@@ -39,20 +39,20 @@ require_course_login($course);
 $userid = $USER->id;
 $context = context_course::instance($courseid);
 
-$user_controller = new block_pseudolearner_user_controller($userid, $courseid);
-$controller = new block_pseudolearner_courses_view_controller($courseid, $user_controller);
+$usercontroller = new block_pseudolearner_user_controller($userid, $courseid);
+$controller = new block_pseudolearner_courses_view_controller($courseid, $usercontroller);
 
 require('navigation.php');
 
-// Handle submitted values and perform fitting actions
+// Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
     $consent = optional_param('consent', null, PARAM_TEXT);
 
     if (!is_null($consent)) {
         if ($consent == 'withdraw') {
-            $user_controller->set_consent(false);
+            $usercontroller->set_consent(false);
         } else if ($consent == 'give') {
-            $user_controller->set_consent(true);
+            $usercontroller->set_consent(true);
         }
     }
 

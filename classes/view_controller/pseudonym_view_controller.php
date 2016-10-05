@@ -44,11 +44,11 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
         $registered = $this->usercontroller->is_registered();
 
         if ($registered) {
-            // Pseudonym registered
+            // Pseudonym registered.
             $button = array('caption' => 'Delete pseudonym',
                 'value' => 1,
                 'name' => 'delete',
-                'description' => 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.'
+                'description' => get_string('description_delete', 'block_pseudolearner')
             );
             $buttons[] = $button;
         }
@@ -62,32 +62,9 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
      * @return string
      */
     public function render_status() {
-        $this->starttime = 123;
-
-        $this->endtime = 456;
-
-        $buttoncaption = "START";
-
-        $buttondisabled = "";
-
-        $buttonvalue = 1;
-
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
-        $firsttemplate->assign('button',
-            array(
-                'type' => 'submit',
-                'name' => 'questionnaire_switcher',
-                'value' => $buttonvalue,
-                'state' => $buttondisabled,
-                'text' => $buttoncaption
-            )
-        );
-
-        $firsttemplate->assign('info_teacher', "blub1");
-        $firsttemplate->assign('analysis_time_start', $this->starttime);
-        $firsttemplate->assign('analysis_time_end', $this->endtime);
-        $firsttemplate->assign('analysis_status_info', "blub2");
+        $firsttemplate->assign('content', 'pseudonym');
 
         return $firsttemplate->load_template();
     }

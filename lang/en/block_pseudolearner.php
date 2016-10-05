@@ -29,3 +29,7 @@ $string['labelfoo'] = 'Config label';
 $string['pseudolearner:addinstance'] = 'Add a pseudolearner block';
 $string['pseudolearner:myaddinstance'] = 'Add a pseudolearner block to my moodle';
 $string['pluginname'] = 'pseudolearner';
+
+$string['description_delete'] = 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.';
+$string['description_withdraw'] = 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.';
+$string['description_give'] = 'Click here to give your consent for tracking learning data with your pseudonym in this course.';

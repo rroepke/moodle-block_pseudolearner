@@ -153,7 +153,5 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100400, 'pseudolearner');
     }
 
-
-
     return true;
 }

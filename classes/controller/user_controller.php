@@ -44,7 +44,7 @@ class block_pseudolearner_user_controller {
     public function create_user_record() {
         global $DB;
 
-        if (!$DB->record_exists($this->usertable,array(
+        if (!$DB->record_exists($this->usertable, array(
             'userid' => $this->userid))) {
             $record = new stdClass();
             $record->userid = $this->userid;
@@ -56,7 +56,7 @@ class block_pseudolearner_user_controller {
     public function create_user_course_record() {
         global $DB;
 
-        if (!$DB->record_exists($this->usercoursetable,array(
+        if (!$DB->record_exists($this->usercoursetable, array(
             'userid' => $this->userid,
             'courseid' => $this->courseid))) {
             $record = new stdClass();

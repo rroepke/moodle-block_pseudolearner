@@ -23,27 +23,14 @@
 <div class="pl_pad_content">
     <div class="grid">
         <div class="col_m_100 bp_align_left-middle">
-            <span><?php echo $this->_['info_teacher']; ?></span><br>
-            <span><i></i></span>
+            <?php echo $this->_['content']; ?>
         </div>
         <div class="col_m_66 bp_align_left-middle">
-        <span><b><?php echo get_string('starttime', 'groupformation'); ?>
-                : </b><?php echo $this->_['analysis_time_start']; ?></span><br>
-            <span><b><?php echo get_string('endtime', 'groupformation'); ?>
-                    : </b><?php echo $this->_['analysis_time_end']; ?></span><br><br>
-            <span><i><?php echo $this->_['analysis_status_info']; ?></i></span>
-            <span><i></i></span>
+            <?php echo $this->_['content']; ?>
         </div>
 
         <div class="col_m_33 bp_align_right-middle">
-            <button type="<?php echo $this->_['button']['type']; ?>"
-                    name="<?php echo $this->_['button']['name']; ?>"
-                    value="<?php echo $this->_['button']['value']; ?>"
-                    class="pl_button pl_button_pill pl_button_small"
-                <?php echo $this->_['button']['state']; ?>
-            >
-                <?php echo $this->_['button']['text']; ?>
-            </button>
+            <?php echo $this->_['content']; ?>
         </div>
     </div>
 </div>

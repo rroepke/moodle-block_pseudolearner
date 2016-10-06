@@ -46,13 +46,28 @@ require('navigation.php');
 
 // Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
+
+    $courses = $usercontroller->get_courses();
+
+    foreach($courses as $course){
+        $consent = optional_param('consent_' . $course->id, null, PARAM_TEXT);
+
+        if (!is_null($consent)) {
+            if ($consent == 'withdraw') {
+                $usercontroller->set_consent(false, $course->id);
+            } else if ($consent == 'give') {
+                $usercontroller->set_consent(true, $course->id);
+            }
+        }
+    }
+
     $consent = optional_param('consent', null, PARAM_TEXT);
 
     if (!is_null($consent)) {
         if ($consent == 'withdraw') {
-            $usercontroller->set_consent(false);
+            $usercontroller->set_consent_for_all(false);
         } else if ($consent == 'give') {
-            $usercontroller->set_consent(true);
+            $usercontroller->set_consent_for_all(true);
         }
     }
 

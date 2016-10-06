@@ -21,7 +21,7 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/config_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/config_controller.php');
 
 $id = required_param('id', PARAM_INT);
 

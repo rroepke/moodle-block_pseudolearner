@@ -24,18 +24,34 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_instance_controller {
 
+    /** @var int ID of the course */
     private $courseid;
 
+    /**
+     * block_pseudolearner_instance_controller constructor.
+     *
+     * @param $courseid
+     */
     public function __construct($courseid) {
         $this->courseid = $courseid;
     }
 
+    /**
+     * Returns whether it is configured or not
+     *
+     * @return mixed
+     */
     public function is_configured() {
         global $DB;
 
         return $DB->get_field('block_pseudolearner', 'configured', array('courseid' => $this->courseid));
     }
 
+    /**
+     * Sets configured property of instance
+     *
+     * @param $configured
+     */
     public function set_configured($configured) {
         global $DB;
 

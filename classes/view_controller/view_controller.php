@@ -93,13 +93,16 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
 
-        if ($this->usercontroller->get_consent()) {
+        if (!$this->usercontroller->is_registered()) {
+            $link = 'link_grey';
+        } else if ($this->usercontroller->get_consent()) {
             $link = 'link_green';
         } else {
             $link = 'link_red';
         }
 
         $firsttemplate->assign('link', $link);
+        $firsttemplate->assign('content', "View");
 
         return $firsttemplate->load_template();
     }

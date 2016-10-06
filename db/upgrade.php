@@ -153,5 +153,20 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100400, 'pseudolearner');
     }
 
+    if ($oldversion < 2016100601) {
+
+        // Define field timestamp to be added to block_pseudolearner_user.
+        $table = new xmldb_table('block_pseudolearner_user');
+        $field = new xmldb_field('timestamp', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'registered');
+
+        // Conditionally launch add field timestamp.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016100601, 'pseudolearner');
+    }
+
     return true;
 }

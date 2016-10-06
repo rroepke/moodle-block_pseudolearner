@@ -30,7 +30,7 @@
             <input type="hidden" name="show" value="view"/>
             <?php foreach ($this->_['buttons'] as $button): ?>
                 <div class="grid bottom_stripe">
-                    <div class="col_m_33 bp_align_left-middle">
+                    <div class="col_m_40 bp_align_left-middle">
                         <button
                             type="submit"
                             name="<?php echo $button['name']; ?>"
@@ -40,7 +40,7 @@
                             <?php echo $button['caption']; ?>
                         </button>
                     </div>
-                    <div class="col_m_66">
+                    <div class="col_m_60">
                         <?php echo $button['description']; ?>
                     </div>
                 </div>

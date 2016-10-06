@@ -35,7 +35,7 @@ class block_pseudolearner extends block_base {
     public function instance_delete() {
         global $DB;
         $courseid = $this->page->course->id;
-        $DB->delete_records('pseudolearner', array('courseid' => $courseid));
+        $DB->delete_records('block_pseudolearner', array('courseid' => $courseid));
         return true;
     }
 
@@ -44,7 +44,7 @@ class block_pseudolearner extends block_base {
         $courseid = $this->page->course->id;
         $record = new stdClass();
         $record->courseid = $courseid;
-        $DB->insert_record('pseudolearner', $record);
+        $DB->insert_record('block_pseudolearner', $record);
         return true;
     }
 

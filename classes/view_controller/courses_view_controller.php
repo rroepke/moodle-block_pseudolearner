@@ -29,7 +29,7 @@ require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_cont
 class block_pseudolearner_courses_view_controller extends block_pseudolearner_basic_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('status', 'options', 'courselist');
+    protected $templatenames = array('courselist','options');
     /** @var string Title of page */
     protected $title = 'courses';
 
@@ -43,15 +43,20 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
 
         $registered = $this->usercontroller->is_registered();
 
-        $consentaction = $this->usercontroller->get_consent() ? 'withdraw' : 'give';
-
         if ($registered) {
 
             // Pseudonym registered.
-            $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
-                'value' => $consentaction,
+            $button = array('caption' => get_string('button_caption_give_all_consent', 'block_pseudolearner'),
+                'value' => 'give',
                 'name' => 'consent',
-                'description' => get_string('button_description_' . $consentaction . '_consent', 'block_pseudolearner')
+                'description' => get_string('button_description_give_all_consent', 'block_pseudolearner')
+            );
+            $buttons[] = $button;
+
+            $button = array('caption' => get_string('button_caption_withdraw_all_consent', 'block_pseudolearner'),
+                'value' => 'withdraw',
+                'name' => 'consent',
+                'description' => get_string('button_description_withdraw_all_consent', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
@@ -89,6 +94,15 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
         $overviewoptions = new block_pseudolearner_template_builder();
         $overviewoptions->set_template('courselist');
         $overviewoptions->assign('id', $this->courseid);
+
+        if ($this->usercontroller->get_consent()) {
+            $link = 'link_green';
+        } else {
+            $link = 'link_red';
+        }
+
+        $overviewoptions->assign('link', $link);
+        $overviewoptions->assign('courses', $this->usercontroller->get_courses());
 
         return $overviewoptions->load_template();
     }

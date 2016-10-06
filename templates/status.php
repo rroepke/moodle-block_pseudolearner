@@ -22,16 +22,12 @@
 
 <div class="pl_pad_content">
     <div class="grid">
-        <div class="col_m_100">
+        <div class="col_s_100 bp_align_left-middle">
             <div class="pl_align_center">
                 <img class="pl_responsive_img" src="pix/id_card.gif">
                 <img class="pl_responsive_img_small" src="pix/<?php echo $this->_['link']; ?>.gif">
                 <img class="pl_responsive_img" src="pix/course.gif">
             </div>
-        </div>
-        <div class="col_m_66 bp_align_left-middle">
-        </div>
-        <div class="col_m_33 bp_align_right-middle">
         </div>
     </div>
 </div>

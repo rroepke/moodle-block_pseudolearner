@@ -62,17 +62,50 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
      * @return string
      */
     public function render_status() {
-        $firsttemplate = new block_pseudolearner_template_builder();
-        $firsttemplate->set_template('status');
+        global $USER;
 
-        if ($this->usercontroller->get_consent()) {
-            $link = 'link_green';
-        } else {
-            $link = 'link_red';
+        $template = new block_pseudolearner_template_builder();
+        $template->set_template('pseudonym');
+
+        $template->assign('user_fullname', fullname($USER));
+
+        $timestamp = $this->usercontroller->get_registered_time();
+
+        if ('en' == get_string('language', 'block_pseudolearner')) {
+            $format = 'F j, Y, g:i a';
+            $trans = array();
+            $timestamp = strtr(date($format, $timestamp), $trans);
+        } else if ('de' == get_string('language', 'block_pseudolearner')) {
+            $format = 'd.m.y, H:m';
+            $trans = array(
+                'Monday' => 'Montag',
+                'Tuesday' => 'Dienstag',
+                'Wednesday' => 'Mittwoch',
+                'Thursday' => 'Donnerstag',
+                'Friday' => 'Freitag',
+                'Saturday' => 'Samstag',
+                'Sunday' => 'Sonntag',
+                'Mon' => 'Mo',
+                'Tue' => 'Di',
+                'Wed' => 'Mi',
+                'Thu' => 'Do',
+                'Fri' => 'Fr',
+                'Sat' => 'Sa',
+                'Sun' => 'So',
+                'January' => 'Januar',
+                'February' => 'Februar',
+                'March' => 'März',
+                'May' => 'Mai',
+                'June' => 'Juni',
+                'July' => 'Juli',
+                'October' => 'Oktober',
+                'December' => 'Dezember'
+            );
+            $timestamp = strtr(date($format, $timestamp), $trans) . ' Uhr';
         }
 
-        $firsttemplate->assign('link', $link);
+        $template->assign('date_registered', $timestamp);
 
-        return $firsttemplate->load_template();
+        return $template->load_template();
     }
 }

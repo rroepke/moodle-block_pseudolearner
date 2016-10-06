@@ -20,15 +20,35 @@
  */
 ?>
 
-<div class="pl_pad_header_small">
-    <?php echo get_string('page_sub_header_courselist', 'block_pseudolearner'); ?>
-</div>
+<!--<div class="pl_pad_header_small">
+    <?php // echo get_string('page_sub_header_courselist', 'block_pseudolearner'); ?>
+</div>-->
 <div class="pl_pad_content">
-    <div class="grid">
-        <form action="<?php echo htmlspecialchars($_SERVER ["PHP_SELF"]); ?>" method="post" autocomplete="off">
-            <input type="hidden" name="id" value="<?php echo $this->_['id']; ?>"/>
-            <input type="hidden" name="sesskey" value="<?php echo sesskey(); ?>"/>
-            <input type="hidden" name="show" value="view"/>
-        </form>
-    </div>
+    <form action="<?php echo htmlspecialchars($_SERVER ["PHP_SELF"]); ?>" method="post" autocomplete="off">
+        <input type="hidden" name="id" value="<?php echo $this->_['id']; ?>"/>
+        <input type="hidden" name="sesskey" value="<?php echo sesskey(); ?>"/>
+        <input type="hidden" name="show" value="courses"/>
+        <?php foreach ($this->_['courses'] as $course): ?>
+            <div class="grid row_highlight">
+                <div class="col_m_75">
+                    <img class="pl_responsive_img_tiny"
+                         src="pix/<?php echo ($course->consent) ? 'link_green' : 'link_red'; ?>.gif">
+                    <b>
+                        <a href="<?php echo $course->url; ?>"><?php echo $course->fullname; ?></a>
+                    </b>
+
+                </div>
+                <div class="col_m_25 bp_align_left-middle">
+                    <button
+                            type="submit"
+                            name="<?php echo $course->button['name']; ?>"
+                            value="<?php echo $course->button['value']; ?>"
+                            class="pl_button pl_button_pill pl_button_tiny">
+                            <?php echo $course->button['caption']; ?>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </form>
 </div>

@@ -24,49 +24,70 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_user_controller {
 
+    /** @var string name of user table */
     private $usertable = 'block_pseudolearner_user';
+    /** @var string name of user-course table */
     private $usercoursetable = 'block_pseudolearner_u_course';
 
+    /** @var int ID of the user */
     private $userid = null;
+    /** @var int ID of the course */
     private $courseid = null;
 
+    /**
+     * block_pseudolearner_user_controller constructor.
+     *
+     * @param $userid
+     * @param null $courseid
+     */
     public function __construct($userid, $courseid = null) {
         $this->userid = $userid;
         $this->courseid = $courseid;
 
-        $this->create_user_record();
+        $this->create_user_record($userid);
 
         if (!is_null($this->courseid)) {
-            $this->create_user_course_record();
+            $this->create_user_course_record($courseid);
         }
     }
 
-    public function create_user_record() {
+    /**
+     * Creates a user record
+     */
+    public function create_user_record($userid) {
         global $DB;
 
         if (!$DB->record_exists($this->usertable, array(
-            'userid' => $this->userid))) {
+            'userid' => $userid))) {
             $record = new stdClass();
-            $record->userid = $this->userid;
+            $record->userid = $userid;
 
             $DB->insert_record($this->usertable, $record);
         }
     }
 
-    public function create_user_course_record() {
+    /**
+     * Creates a user-course record
+     */
+    public function create_user_course_record($courseid) {
         global $DB;
 
         if (!$DB->record_exists($this->usercoursetable, array(
             'userid' => $this->userid,
-            'courseid' => $this->courseid))) {
+            'courseid' => $courseid))) {
             $record = new stdClass();
             $record->userid = $this->userid;
-            $record->courseid = $this->courseid;
+            $record->courseid = $courseid;
 
             $DB->insert_record($this->usercoursetable, $record);
         }
     }
 
+    /**
+     * Returns whether a pseudonym is registered or not
+     *
+     * @return mixed
+     */
     public function is_registered() {
         global $DB;
 
@@ -79,6 +100,11 @@ class block_pseudolearner_user_controller {
         );
     }
 
+    /**
+     * Sets registered setting for user
+     *
+     * @param $registered
+     */
     public function set_registered($registered) {
         global $DB;
 
@@ -90,6 +116,7 @@ class block_pseudolearner_user_controller {
         );
 
         $record->registered = $registered;
+        $record->timestamp = time();
 
         $DB->update_record(
             $this->usertable,
@@ -97,30 +124,32 @@ class block_pseudolearner_user_controller {
         );
     }
 
+    /**
+     * Deletes pseudonym
+     */
     public function delete_pseudonym() {
         // TODO handle pseudonym deletion.
 
-        $this->withdraw_consent_for_all();
+        $this->set_consent_for_all(false);
 
         $this->set_registered(false);
     }
 
+    /**
+     * Registers pseudonym
+     */
     public function register_pseudonym() {
         // TODO handle pseudonym registration.
 
         $this->set_registered(true);
     }
 
-    public function withdraw_consent_for_all() {
-        $userid = $this->userid;
-        $courses = enrol_get_all_users_courses($userid);
-
-        foreach (array_keys($courses) as $courseid) {
-            $this->set_consent(false, $courseid);
-        }
-
-    }
-
+    /**
+     * Returns consent for course
+     *
+     * @param null $courseid
+     * @return bool|mixed
+     */
     public function get_consent($courseid = null) {
         global $DB;
         if ($DB->record_exists($this->usercoursetable, array(
@@ -140,6 +169,12 @@ class block_pseudolearner_user_controller {
         }
     }
 
+    /**
+     * Sets consent for course
+     *
+     * @param $consent
+     * @param null $courseid
+     */
     public function set_consent($consent, $courseid = null) {
         global $DB;
 
@@ -161,6 +196,65 @@ class block_pseudolearner_user_controller {
                 $this->usercoursetable,
                 $record
             );
+        } else {
+            $this->create_user_course_record($courseid);
+            $this->set_consent($consent, $courseid);
         }
+    }
+
+    /**
+     * Sets consent for all
+     *
+     * @param $consent
+     */
+    public function set_consent_for_all($consent) {
+        $courses = $this->get_courses();
+
+        foreach($courses as $course) {
+            $this->set_consent($consent, $course->id);
+        }
+    }
+
+    /**
+     * Returns array of all courses
+     *
+     * @return array
+     */
+    public function get_courses() {
+        $userid = $this->userid;
+        $courses = enrol_get_all_users_courses($userid);
+
+        foreach ($courses as $course) {
+            $url = new moodle_url('/course/view.php', array('id'=>$course->id));
+            $course->url = $url->out();
+            $course->consent = $this->get_consent($course->id);
+            $consentaction = $this->get_consent($course->id) ? 'withdraw' : 'give';
+            $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
+                'value' => $consentaction,
+                'name' => 'consent_'. $course->id
+            );
+            $course->button = $button;
+        }
+
+        sort($courses);
+
+        return $courses;
+    }
+
+    /**
+     * Returns time of registration
+     *
+     * @return int
+     */
+    public function get_registered_time() {
+        global $DB;
+
+        return $DB->get_field(
+            $this->usertable,
+            'timestamp',
+            array(
+                'userid' => $this->userid,
+            )
+        );
     }
 }

@@ -31,7 +31,7 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
     /** @var array Template names */
     protected $templatenames = array('status', 'options', 'courselist');
     /** @var string Title of page */
-    protected $title = 'Courses';
+    protected $title = 'courses';
 
     /**
      * Returns all option buttons.
@@ -48,10 +48,10 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
         if ($registered) {
 
             // Pseudonym registered.
-            $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description.
+            $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
                 'value' => $consentaction,
                 'name' => 'consent',
-                'description' => get_string('description_' . $consentaction, 'block_pseudolearner')
+                'description' => get_string('button_description_' . $consentaction . '_consent', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
@@ -68,7 +68,14 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
     public function render_status() {
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
-        $firsttemplate->assign('content', 'courses');
+
+        if ($this->usercontroller->get_consent()) {
+            $link = 'link_green';
+        } else {
+            $link = 'link_red';
+        }
+
+        $firsttemplate->assign('link', $link);
 
         return $firsttemplate->load_template();
     }

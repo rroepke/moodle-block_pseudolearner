@@ -31,7 +31,7 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
     /** @var array Template names */
     protected $templatenames = array('status', 'options');
     /** @var string Title of page */
-    protected $title = 'Overview';
+    protected $title = 'view';
 
     /**
      * Returns all option buttons.
@@ -47,34 +47,34 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
 
         if ($registered) {
             // Pseudonym registered.
-            $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description.
+            $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
                 'value' => $consentaction,
                 'name' => 'consent',
-                'description' => get_string('description_' . $consentaction, 'block_pseudolearner')
+                'description' => get_string('button_description_' . $consentaction . '_consent', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
-            $button = array('caption' => 'View pseudonym',
+            $button = array('caption' => get_string('button_caption_view_pseudonym', 'block_pseudolearner'),
                 'value' => 1,
                 'name' => 'pseudonym',
-                'description' => 'Click here to see more details about your registered pseudonym in Moodle.'
+                'description' => get_string('button_description_view_pseudonym', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
-            $button = array('caption' => 'View courses',
+            $button = array('caption' => get_string('button_caption_view_courses', 'block_pseudolearner'),
                 'value' => 1,
                 'name' => 'courses',
-                'description' => 'Click here to see an overview about all courses and their current tracking status.'
+                'description' => get_string('button_description_view_courses', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
         } else {
 
             // No pseudonym registered.
-            $button = array('caption' => 'Register pseudonym',
+            $button = array('caption' => get_string('button_caption_register_pseudonym', 'block_pseudolearner'),
                 'value' => 1,
                 'name' => 'register',
-                'description' => 'Click here to register a pseudonym which can be used for tracking your learning data.'
+                'description' => get_string('button_description_register_pseudonym', 'block_pseudolearner')
             );
             $buttons[] = $button;
 
@@ -92,7 +92,14 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
 
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
-        $firsttemplate->assign('content', 'view');
+
+        if ($this->usercontroller->get_consent()) {
+            $link = 'link_green';
+        } else {
+            $link = 'link_red';
+        }
+
+        $firsttemplate->assign('link', $link);
 
         return $firsttemplate->load_template();
     }

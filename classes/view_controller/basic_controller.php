@@ -39,7 +39,7 @@ abstract class block_pseudolearner_basic_controller {
     /** @var array Template names */
     protected $templatenames = array();
     /** @var string Title of page */
-    protected $title = '<Title>';
+    protected $title = '<title>';
 
     /**
      * block_pseudolearner_basic_controller constructor.
@@ -52,6 +52,7 @@ abstract class block_pseudolearner_basic_controller {
         $this->usercontroller = $usercontroller;
         $this->view = new block_pseudolearner_template_builder();
         $this->view->set_template('wrapper_view');
+        $this->title = get_string('page_title_' . $this->title, 'block_pseudolearner');
     }
 
     /**

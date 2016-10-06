@@ -30,6 +30,21 @@ $string['pseudolearner:addinstance'] = 'Add a pseudolearner block';
 $string['pseudolearner:myaddinstance'] = 'Add a pseudolearner block to my moodle';
 $string['pluginname'] = 'pseudolearner';
 
-$string['description_delete'] = 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.';
-$string['description_withdraw'] = 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.';
-$string['description_give'] = 'Click here to give your consent for tracking learning data with your pseudonym in this course.';
+$string['page_title_view'] = 'Overview';
+$string['page_title_pseudonym'] = 'Pseudonym';
+$string['page_title_courses'] = 'Courses';
+$string['page_sub_header_options'] = 'Options';
+$string['page_sub_header_courselist'] = 'Other Courses';
+
+$string['button_caption_give_consent'] = 'Give consent';
+$string['button_caption_withdraw_consent'] = 'Withdraw consent';
+$string['button_caption_view_pseudonym'] = 'View pseudonym';
+$string['button_caption_view_courses'] = 'View courses';
+$string['button_caption_register_pseudonym'] = 'Register pseudonym';
+$string['button_caption_delete_pseudonym'] = 'Delete pseudonym';
+$string['button_description_register_pseudonym'] = 'Click here to register a pseudonym which can be used for tracking your learning data.';
+$string['button_description_delete_pseudonym'] = 'Click here to delete your currently registered pseudonym. This way, all courses stop tracking learning data with this pseudonym.';
+$string['button_description_view_pseudonym'] = 'Click here to see more details about your registered pseudonym in Moodle.';
+$string['button_description_view_courses'] = 'Click here to see an overview about all courses and their current tracking status.';
+$string['button_description_withdraw_consent'] = 'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.';
+$string['button_description_give_consent'] = 'Click here to give your consent for tracking learning data with your pseudonym in this course.';

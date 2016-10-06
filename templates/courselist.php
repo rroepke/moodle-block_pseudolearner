@@ -21,7 +21,7 @@
 ?>
 
 <div class="pl_pad_header_small">
-    <?php echo "Other Courses"; ?>
+    <?php echo get_string('page_sub_header_courselist', 'block_pseudolearner'); ?>
 </div>
 <div class="pl_pad_content">
     <div class="grid">

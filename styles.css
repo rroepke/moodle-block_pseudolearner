@@ -1137,3 +1137,19 @@
     position: absolute;
     z-index: 99;
 }
+
+.path-blocks-pseudolearner img.pl_responsive_img {
+    width: 20%;
+    min-width: 100px;
+    height: auto;
+    margin: 1em;
+}
+
+.path-blocks-pseudolearner img.pl_responsive_img_small {
+    width: 10%;
+    min-width: 50px;
+    height: auto;
+}
+.path-blocks-pseudolearner div.pl_align_center{
+    text-align: center;
+}

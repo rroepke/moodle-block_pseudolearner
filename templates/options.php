@@ -20,7 +20,7 @@
  */
 ?>
 <div class="pl_pad_header_small">
-    <?php echo "Options"; ?>
+    <?php echo get_string('page_sub_header_options', 'block_pseudolearner'); ?>
 </div>
 <div class="pl_pad_content">
     <div class="grid">

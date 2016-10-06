@@ -31,7 +31,7 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
     /** @var array Template names */
     protected $templatenames = array('status', 'options');
     /** @var string Title of page */
-    protected $title = 'Pseudonym';
+    protected $title = 'pseudonym';
 
     /**
      * Returns all option buttons.
@@ -45,10 +45,10 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
 
         if ($registered) {
             // Pseudonym registered.
-            $button = array('caption' => 'Delete pseudonym',
+            $button = array('caption' => get_string('button_caption_delete_pseudonym', 'block_pseudolearner'),
                 'value' => 1,
                 'name' => 'delete',
-                'description' => get_string('description_delete', 'block_pseudolearner')
+                'description' => get_string('button_description_delete_pseudonym', 'block_pseudolearner')
             );
             $buttons[] = $button;
         }
@@ -64,7 +64,14 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
     public function render_status() {
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
-        $firsttemplate->assign('content', 'pseudonym');
+
+        if ($this->usercontroller->get_consent()) {
+            $link = 'link_green';
+        } else {
+            $link = 'link_red';
+        }
+
+        $firsttemplate->assign('link', $link);
 
         return $firsttemplate->load_template();
     }

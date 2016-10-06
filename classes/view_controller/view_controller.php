@@ -50,7 +50,7 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
             $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description.
                 'value' => $consentaction,
                 'name' => 'consent',
-                'description' => get_string('description_withdraw', 'block_pseudolearner')
+                'description' => get_string('description_' . $consentaction, 'block_pseudolearner')
             );
             $buttons[] = $button;
 

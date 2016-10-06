@@ -51,8 +51,7 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
             $button = array('caption' => $consentaction . ' consent', // TODO fix caption and description.
                 'value' => $consentaction,
                 'name' => 'consent',
-                'description' =>
-                    'Click here to withdraw your consent for tracking learning data with your pseudonym in this course.'
+                'description' => get_string('description_' . $consentaction, 'block_pseudolearner')
             );
             $buttons[] = $button;
 

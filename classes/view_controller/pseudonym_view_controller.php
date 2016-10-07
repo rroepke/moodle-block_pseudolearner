@@ -22,7 +22,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/basic_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 

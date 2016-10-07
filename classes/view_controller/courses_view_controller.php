@@ -22,14 +22,14 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/template_builder.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/basic_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 
 class block_pseudolearner_courses_view_controller extends block_pseudolearner_basic_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('courselist','options');
+    protected $templatenames = array('courselist', 'options');
     /** @var string Title of page */
     protected $title = 'courses';
 

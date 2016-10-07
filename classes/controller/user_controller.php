@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class block_pseudolearner_instance
+ * Class block_pseudolearner_user_controller
  *
  * @package block_pseudolearner
  * @author Rene Roepke
@@ -210,7 +210,7 @@ class block_pseudolearner_user_controller {
     public function set_consent_for_all($consent) {
         $courses = $this->get_courses();
 
-        foreach($courses as $course) {
+        foreach ($courses as $course) {
             $this->set_consent($consent, $course->id);
         }
     }
@@ -225,7 +225,7 @@ class block_pseudolearner_user_controller {
         $courses = enrol_get_all_users_courses($userid);
 
         foreach ($courses as $course) {
-            $url = new moodle_url('/course/view.php', array('id'=>$course->id));
+            $url = new moodle_url('/course/view.php', array('id' => $course->id));
             $course->url = $url->out();
             $course->consent = $this->get_consent($course->id);
             $consentaction = $this->get_consent($course->id) ? 'withdraw' : 'give';

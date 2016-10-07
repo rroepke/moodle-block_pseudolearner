@@ -60,8 +60,8 @@ if (data_submitted() && confirm_sesskey()) {
 }
 
 $PAGE->set_url('/blocks/pseudolearner/pseudonym_view.php');
-$PAGE->set_title(format_string($file));
-$PAGE->set_heading(format_string($file));
+$PAGE->set_title(format_string(get_string('page_title_pseudonym', 'block_pseudolearner')));
+$PAGE->set_heading(format_string(get_string('page_title_pseudonym', 'block_pseudolearner')));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();

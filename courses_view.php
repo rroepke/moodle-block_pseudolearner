@@ -49,7 +49,7 @@ if (data_submitted() && confirm_sesskey()) {
 
     $courses = $usercontroller->get_courses();
 
-    foreach($courses as $course){
+    foreach ($courses as $course){
         $consent = optional_param('consent_' . $course->id, null, PARAM_TEXT);
 
         if (!is_null($consent)) {
@@ -76,8 +76,8 @@ if (data_submitted() && confirm_sesskey()) {
 }
 
 $PAGE->set_url('/blocks/pseudolearner/courses_view.php');
-$PAGE->set_title(format_string($file));
-$PAGE->set_heading(format_string($file));
+$PAGE->set_title(format_string(get_string('page_title_courses', 'block_pseudolearner')));
+$PAGE->set_heading(format_string(get_string('page_title_courses', 'block_pseudolearner')));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();

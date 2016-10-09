@@ -22,15 +22,14 @@
  */
 
 $string['blockstring'] = 'Block string';
-$string['descconfig'] = 'Description of the config section';
-$string['descfoo'] = 'Config description';
-$string['headerconfig'] = 'Config section header';
-$string['labelfoo'] = 'Config label';
+$string['config_header'] = 'Pseudonymity Provider';
+$string['config_description'] = 'In order to register a pseudonym a pseudonymity provider needs to be configured.';
+$string['config_label_url'] = 'URL';
+$string['config_description_url'] = 'URL to redirect to, if users want to register a pseudonym';
 $string['pseudolearner:addinstance'] = 'Add a pseudolearner block';
 $string['pseudolearner:myaddinstance'] = 'Add a pseudolearner block to my moodle';
 $string['pluginname'] = 'pseudolearner';
 $string['language'] = 'en';
-
 $string['page_title_view'] = 'Overview';
 $string['page_title_pseudonym'] = 'Pseudonym';
 $string['page_title_courses'] = 'Courses';

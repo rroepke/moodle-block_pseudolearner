@@ -22,6 +22,8 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/instance_controller.php');
+
 class block_pseudolearner_user_controller {
 
     /** @var string name of user table */
@@ -222,18 +224,24 @@ class block_pseudolearner_user_controller {
      */
     public function get_courses() {
         $userid = $this->userid;
-        $courses = enrol_get_all_users_courses($userid);
+        $allcourses = enrol_get_all_users_courses($userid);
 
-        foreach ($courses as $course) {
-            $url = new moodle_url('/course/view.php', array('id' => $course->id));
-            $course->url = $url->out();
-            $course->consent = $this->get_consent($course->id);
-            $consentaction = $this->get_consent($course->id) ? 'withdraw' : 'give';
-            $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
-                'value' => $consentaction,
-                'name' => 'consent_'. $course->id
-            );
-            $course->button = $button;
+        $courses = array();
+
+        foreach ($allcourses as $course) {
+            $instancecontroller = new block_pseudolearner_instance_controller($course->id);
+            if ($instancecontroller->is_activated()) {
+                $url = new moodle_url('/course/view.php', array('id' => $course->id));
+                $course->url = $url->out();
+                $course->consent = $this->get_consent($course->id);
+                $consentaction = $this->get_consent($course->id) ? 'withdraw' : 'give';
+                $button = array('caption' => get_string('button_caption_' . $consentaction . '_consent', 'block_pseudolearner'),
+                    'value' => $consentaction,
+                    'name' => 'consent_'. $course->id
+                );
+                $course->button = $button;
+                $courses[] = $course;
+            }
         }
 
         sort($courses);

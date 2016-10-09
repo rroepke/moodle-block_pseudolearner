@@ -24,6 +24,8 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_instance_controller {
 
+    private $tablename = 'block_pseudolearner';
+
     /** @var int ID of the course */
     private $courseid;
 
@@ -44,7 +46,7 @@ class block_pseudolearner_instance_controller {
     public function is_configured() {
         global $DB;
 
-        return $DB->get_field('block_pseudolearner', 'configured', array('courseid' => $this->courseid));
+        return $DB->get_field($this->tablename, 'configured', array('courseid' => $this->courseid));
     }
 
     /**
@@ -55,10 +57,21 @@ class block_pseudolearner_instance_controller {
     public function set_configured($configured) {
         global $DB;
 
-        $record = $DB->get_record('block_pseudolearner', array('courseid' => $this->courseid));
+        $record = $DB->get_record($this->tablename, array('courseid' => $this->courseid));
 
         $record->configured = $configured;
 
-        $DB->update_record('block_pseudolearner', $record);
+        $DB->update_record($this->tablename, $record);
+    }
+
+    /**
+     * Returns whether the plugin is activated in the course or not
+     *
+     * @return bool
+     */
+    public function is_activated() {
+        global $DB;
+
+        return $DB->record_exists($this->tablename, array('courseid' => $this->courseid));
     }
 }

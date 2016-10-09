@@ -84,7 +84,7 @@ class block_pseudolearner extends block_base {
             $this->content->text .= "site context";
         }
 
-        $controller = new block_pseudolearner_content_controller($courseid, $currentcontext);
+        $controller = new block_pseudolearner_content_controller($courseid, $currentcontext, $this->config);
         $this->content = $controller->get_content($USER->id);
 
         return $this->content;
@@ -105,7 +105,7 @@ class block_pseudolearner extends block_base {
     }
 
     public function has_config() {
-        return false;
+        return true;
     }
 
     public function cron() {

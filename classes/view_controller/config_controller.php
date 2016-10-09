@@ -50,7 +50,9 @@ class block_pseudolearner_config_controller {
         echo "<button type=\"submit\" name=\"save\" value=\"1\">".get_string("submit")."</button>";
         echo "<button type=\"submit\" name=\"save\" value=\"0\">".get_string("cancel")."</button>";
 
-         echo '</form>';
+        echo '</form>';
+
+        echo "<a href=\"" . get_config('pseudolearner','url') . "\">LINK</a>";
     }
 
     public function save() {

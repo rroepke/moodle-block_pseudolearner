@@ -25,10 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $settings->add(new admin_setting_heading('sampleheader',
-                                         get_string('headerconfig', 'block_pseudolearner'),
-                                         get_string('descconfig', 'block_pseudolearner')));
+                                         get_string('config_header', 'block_pseudolearner'),
+                                         get_string('config_description', 'block_pseudolearner')));
 
-$settings->add(new admin_setting_configcheckbox('pseudolearner/foo',
-                                                get_string('labelfoo', 'block_pseudolearner'),
-                                                get_string('descfoo', 'block_pseudolearner'),
-                                                '0'));
+$settings->add(new admin_setting_configtext('pseudolearner/url',
+                                                get_string('config_label_url', 'block_pseudolearner'),
+                                                get_string('config_description_url', 'block_pseudolearner'),
+                                                'https://mypseudoprovider.net'));

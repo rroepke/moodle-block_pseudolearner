@@ -51,7 +51,7 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      * @param Exception $e
      * @throws moodle_exception
      */
-    protected function throwException($e) {
+    protected function throw_exception($e) {
         throw new moodle_exception($e->getMessage());
     }
 

@@ -90,7 +90,7 @@ class block_pseudolearner_content_controller {
      */
     public function get_user_content($userid, $content) {
 
-        $uc = new block_pseudolearner_user_controller($userid,$this->courseid);
+        $uc = new block_pseudolearner_user_controller($userid, $this->courseid);
 
         $pseudonym = $uc->is_registered();
         $consent = $uc->get_consent();
@@ -100,27 +100,40 @@ class block_pseudolearner_content_controller {
         $text .= "<p>";
         $text .= get_string('content_pseudonym','block_pseudolearner');
         $text .= "<br>";
-        $text .= "<span class=\"label label-".($pseudonym?"success":"default")."\">"
-            . ($pseudonym ? get_string('content_registered','block_pseudolearner') : get_string('content_notregistered','block_pseudolearner'))
-            . "</span><br>";
+        $text .= "<span class=\"label label-";
+        $text .= ($pseudonym ? "success" : "default");
+        $text .= "\">";
+        $text .= ($pseudonym ? get_string('content_registered', 'block_pseudolearner') : get_string('content_notregistered', 'block_pseudolearner'));
+        $text .= "</span>";
+        $text .= "<br>";
 
         $text .= "</p>";
 
         $text .= "<p>";
-        $text .= get_string('content_anonymous_tracking','block_pseudolearner');
+        $text .= get_string('content_anonymous_tracking', 'block_pseudolearner');
         $text .= "<br>";
-        $text .= "<span class=\"label label-".($consent?"success":"default")."\">"
-            . ($consent ? get_string('content_activated','block_pseudolearner') : get_string('content_notactivated','block_pseudolearner'))
-            . "</span><br>";
+        $text .= "<span class=\"label label-";
+        $text .= ($consent ? "success" : "default");
+        $text .= "\">";
+        $text .= ($consent ? get_string('content_activated', 'block_pseudolearner') : get_string('content_notactivated', 'block_pseudolearner'));
+        $text .= "</span>";
+        $text .= "<br>";
 
         $text .= "</p>";
 
         $footer = "<p>";
-        $footer .= "<a href=\"" . $this->get_link("view") . "\">";
-        $footer .= "<button class=\"btn btn-default\">".get_string("view")."</button></a>";
+        $footer .= "<a href=\"";
+        $footer .= $this->get_link("view");
+        $footer .= "\">";
+        $footer .= "<button class=\"btn btn-default\">";
+        $footer .= get_string("view");
+        $footer .= "</button>";
+        $footer .= "</a>";
         $footer .= "</p>";
+
         $content->text = $text;
         $content->footer = $footer;
+
         return $content;
     }
 
@@ -129,9 +142,13 @@ class block_pseudolearner_content_controller {
         $text = "";
 
         $text .= "<p>";
-        $text .= "<a href=\"" . $this->get_link("config_view") . "\">";
-        $text .= "<button class=\"btn btn-default\">".get_string("settings")."</button></a>";
-        $text .= "<br>";
+        $text .= "<a href=\"";
+        $text .= $this->get_link("config_view");
+        $text .= "\">";
+        $text .= "<button class=\"btn btn-default\">";
+        $text .= get_string("settings");
+        $text .= "</button>";
+        $text .= "</a>";
         $text .= "</p>";
 
         $content->text = $text;

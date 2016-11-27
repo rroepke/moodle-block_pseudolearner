@@ -34,10 +34,10 @@ $mac = required_param('mac', PARAM_TEXT);
 $url = get_config('pseudolearner', 'url');
 $key = get_config('pseudolearner', 'securitytoken');
 $chiffre = get_config('pseudolearner', 'chiffre');
-if (empty($chiffre)){
+if (empty($chiffre)) {
     $chiffre = 'AES-256-CBC';
 }
-if (empty($hash)){
+if (empty($hash)) {
     $hash = 'sha256';
 }
 $hash = get_config('pseudolearner', 'hash');
@@ -45,9 +45,9 @@ $hash = get_config('pseudolearner', 'hash');
 $userid = $USER->id;
 
 $comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid);
-$params = $comhandler->decryptData($cipher);
-$comhandler->validateResponseParams($params, $code);
-$comhandler->verifyHMAC($mac, $params);
+$params = $comhandler->decrypt_data($cipher);
+$comhandler->validate_response_params($params, $code);
+$comhandler->verify_hmac($mac, $params);
 
 $code = $params->code;
 
@@ -69,7 +69,7 @@ if ($code == $comhandler::CODE_SUCCESS) {
     $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
     redirect($url);
 
-} else if ($code == $comhandler::CODE_FAIL){
+} else if ($code == $comhandler::CODE_FAIL) {
 
     $courseid = $comhandler->get_courseid_of_last_request();
 

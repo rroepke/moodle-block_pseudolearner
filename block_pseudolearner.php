@@ -91,9 +91,12 @@ class block_pseudolearner extends block_base {
         $currentcontext = $this->page->context->get_course_context(false);
 
         $this->content = new stdClass();
-        $this->content->text = get_string('content_notconfigured_notifyadmin','block_pseudolearner');
+        $this->content->text = get_string('content_notconfigured_notifyadmin', 'block_pseudolearner');
 
-        if (empty($currentcontext) || empty(get_config('pseudolearner','servicename')) || empty(get_config('pseudolearner','url')) || empty(get_config('pseudolearner','securitytoken')) ){
+        if (empty($currentcontext)
+            || (get_config('pseudolearner', 'servicename') == "")
+            || (get_config('pseudolearner', 'url') == "")
+            || (get_config('pseudolearner', 'securitytoken') == "")){
             return $this->content;
         }
 

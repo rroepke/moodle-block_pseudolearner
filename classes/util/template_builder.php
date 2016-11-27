@@ -20,6 +20,9 @@
  * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class block_pseudolearner_template_builder {
 
     /** @var string This is the path for the template file which is used */

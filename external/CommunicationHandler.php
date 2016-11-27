@@ -16,7 +16,7 @@ class CommunicationHandler {
     /** @var string openssl chiffre */
     protected $chiffre;
     /** @var int size of initialization vector */
-    protected $iv_size;
+    protected $ivsize;
     /** @var string hash function for hmac */
     protected $hash;
 
@@ -31,7 +31,7 @@ class CommunicationHandler {
         $this->key = pack('H*', $key);
         $this->chiffre = $chiffre;
         $this->hash = $hash;
-        $this->iv_size = openssl_cipher_iv_length($chiffre);
+        $this->ivsize = openssl_cipher_iv_length($chiffre);
     }
 
     /**
@@ -187,17 +187,17 @@ class CommunicationHandler {
         try {
             $chiffre = $this->chiffre;
             $key = $this->key;
-            $iv_size = $this->iv_size;
+            $ivsize = $this->ivsize;
 
-            $iv = openssl_random_pseudo_bytes($iv_size);
+            $iv = openssl_random_pseudo_bytes($ivsize);
 
             $ciphertext = openssl_encrypt($plaintext, $chiffre, $key, OPENSSL_RAW_DATA, $iv);
 
             $ciphertext = $iv . $ciphertext;
 
-            $ciphertext_base64 = base64_encode($ciphertext);
+            $ciphertextbase64 = base64_encode($ciphertext);
 
-            return $ciphertext_base64;
+            return $ciphertextbase64;
 
         } catch (\Exception $e) {
             $this->throwException(new \Exception("Error while encrypting data"));
@@ -227,17 +227,17 @@ class CommunicationHandler {
         try {
             $chiffre = $this->chiffre;
             $key = $this->key;
-            $iv_size = $this->iv_size;
+            $ivsize = $this->ivsize;
 
-            $ciphertext_dec = base64_decode($ciphertext);
+            $ciphertextdec = base64_decode($ciphertext);
 
-            $iv_dec = substr($ciphertext_dec, 0, $iv_size);
+            $ivdec = substr($ciphertextdec, 0, $ivsize);
 
-            $ciphertext_dec = substr($ciphertext_dec, $iv_size);
+            $ciphertextdec = substr($ciphertextdec, $ivsize);
 
-            $plaintext_dec = openssl_decrypt($ciphertext_dec, $chiffre, $key, OPENSSL_RAW_DATA, $iv_dec);
+            $plaintextdec = openssl_decrypt($ciphertextdec, $chiffre, $key, OPENSSL_RAW_DATA, $ivdec);
 
-            $plaintext = rtrim($plaintext_dec, "\0");
+            $plaintext = rtrim($plaintextdec, "\0");
 
             return $plaintext;
         } catch (\Exception $e) {
@@ -292,13 +292,13 @@ class CommunicationHandler {
     /**
      * Verifies hmac of params object
      *
-     * @param string $received_hmac
+     * @param string $receivedhmac
      * @param stdClass $data
      */
-    public function verifyHMAC($received_hmac, $data) {
+    public function verifyHMAC($receivedhmac, $data) {
         $hmac = $this->computeHMAC($data);
 
-        if (!($hmac === $received_hmac)) {
+        if (!($hmac === $receivedhmac)) {
             $this->throwException(new \Exception('MAC invalid'));
         }
     }

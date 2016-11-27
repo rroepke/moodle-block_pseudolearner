@@ -22,6 +22,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot . '/blocks/pseudolearner/external/CommunicationHandler.php');
 
 class block_pseudolearner_communication_handler extends CommunicationHandler {
@@ -62,7 +64,7 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      * @return string
      */
     public function build_request($url, $service, $timestamp = null) {
-        if (is_null($timestamp)){
+        if (is_null($timestamp)) {
             $timestamp = time();
         }
 
@@ -78,10 +80,10 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
     /**
      * Deletes all requests of the user
      */
-    private function delete_requests(){
+    private function delete_requests() {
         global $DB;
 
-        $DB->delete_records('block_pseudolearner_request',array('userid' => $this->userid));
+        $DB->delete_records('block_pseudolearner_request', array('userid' => $this->userid));
     }
 
     /**
@@ -89,7 +91,7 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      *
      * @param $timestamp
      */
-    private function log_request($timestamp){
+    private function log_request($timestamp) {
         global $DB;
 
         $record = new stdClass();
@@ -98,7 +100,7 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
         $record->courseid = $this->courseid;
         $record->timestamp = $timestamp;
 
-        $DB->insert_record('block_pseudolearner_request',$record);
+        $DB->insert_record('block_pseudolearner_request', $record);
     }
 
     /**
@@ -106,10 +108,12 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      *
      * @return mixed
      */
-    public function get_courseid_of_last_request(){
+    public function get_courseid_of_last_request() {
         global $DB;
 
-        $courseid = $DB->get_field('block_pseudolearner_request','courseid',array('userid' => $this->userid));
+        $courseid = $DB->get_field('block_pseudolearner_request', 'courseid', array(
+            'userid' => $this->userid
+        ));
 
         $this->delete_requests();
 

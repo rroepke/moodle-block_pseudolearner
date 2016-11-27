@@ -31,24 +31,24 @@ $cipher = required_param('cipher', PARAM_TEXT);
 $code = required_param('code', PARAM_TEXT);
 $mac = required_param('mac', PARAM_TEXT);
 
-$url = get_config('pseudolearner','url');
-$key = get_config('pseudolearner','securitytoken');
-$chiffre = get_config('pseudolearner','chiffre');
-$hash = get_config('pseudolearner','hash');
+$url = get_config('pseudolearner', 'url');
+$key = get_config('pseudolearner', 'securitytoken');
+$chiffre = get_config('pseudolearner', 'chiffre');
+$hash = get_config('pseudolearner', 'hash');
 
 $userid = $USER->id;
 
-$comhandler = new block_pseudolearner_communication_handler($key,$chiffre,$hash, $userid);
+$comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid);
 $params = $comhandler->decryptData($cipher);
 $comhandler->validateResponseParams($params, $code);
-$comhandler->verifyHMAC($mac,$params);
+$comhandler->verifyHMAC($mac, $params);
 
 $code = $params->code;
 
 if ($code == $comhandler::CODE_SUCCESS) {
 
-    $current_timestamp = time();
-    if (!property_exists($params, 'timestamp') || $current_timestamp - 60 * 10 > $params->timestamp) {
+    $currenttimestamp = time();
+    if (!property_exists($params, 'timestamp') || $currenttimestamp - 60 * 10 > $params->timestamp) {
         var_dump("cipher invalid");
     }
 
@@ -63,13 +63,13 @@ if ($code == $comhandler::CODE_SUCCESS) {
     $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
     redirect($url);
 
-}else if ($code == $comhandler::CODE_FAIL){
+} else if ($code == $comhandler::CODE_FAIL){
 
     $courseid = $comhandler->get_courseid_of_last_request();
 
     $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
     redirect($url);
 
-}else{
+} else {
     throw new moodle_exception('code invalid');
 }

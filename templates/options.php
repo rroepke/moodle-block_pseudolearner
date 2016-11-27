@@ -18,6 +18,9 @@
  * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 ?>
 <div class="pl_pad_header_small">
     <?php echo get_string('page_sub_header_options', 'block_pseudolearner'); ?>

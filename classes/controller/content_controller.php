@@ -58,14 +58,14 @@ class block_pseudolearner_content_controller {
     public function get_content() {
         $content = new stdClass();
         if (has_capability('moodle/block:edit', $this->context)) {
-            if (get_config('pseudolearner','url') === '' || !$instance = $this->get_instance()) {
+            if (get_config('pseudolearner', 'url') === '' || !$instance = $this->get_instance()) {
                 $content->text = "can edit settings & has no instance";
             } else {
                 $content->text = "can edit settings & has instance";
                 $content->footer = "<a href=\"" . $this->get_link("config_view") . "\"><button>CONFIGURE ME</button></a>";
             }
         } else {
-            if (get_config('pseudolearner','url') === '' || !$instance = $this->get_instance()) {
+            if (get_config('pseudolearner', 'url') === '' || !$instance = $this->get_instance()) {
                 $content->text = "Not configured yet.";
             } else {
                 $content->text = "cannot edit settings & has instance";

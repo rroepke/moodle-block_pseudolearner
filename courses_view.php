@@ -49,7 +49,7 @@ if (data_submitted() && confirm_sesskey()) {
 
     $courses = $usercontroller->get_courses();
 
-    foreach ($courses as $course){
+    foreach ($courses as $course) {
         $consent = optional_param('consent_' . $course->id, null, PARAM_TEXT);
 
         if (!is_null($consent)) {

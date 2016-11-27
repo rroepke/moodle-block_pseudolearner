@@ -66,16 +66,14 @@ if (data_submitted() && confirm_sesskey()) {
 
     if ($register) {
 
-        $key = get_config('pseudolearner','securitytoken');
-        $chiffre = get_config('pseudolearner','chiffre');
-        $hash = get_config('pseudolearner','hash');
+        $key = get_config('pseudolearner', 'securitytoken');
+        $chiffre = get_config('pseudolearner', 'chiffre');
+        $hash = get_config('pseudolearner', 'hash');
         $comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid, $courseid);
 
-        $url = get_config('pseudolearner','url');
-        $service = get_config('pseudolearner','servicename');
-        // TODO origin needs to be determined automatically
-        $origin = $PAGE->url->out()."?id=".$courseid."&show=view";
-        // $origin = "http://moodle.dev/blocks/pseudolearner/view.php?id=3&show=view";
+        $url = get_config('pseudolearner', 'url');
+        $service = get_config('pseudolearner', 'servicename');
+        $origin = $PAGE->url->out() . "?id=" . $courseid . "&show=view";
         $timestamp = time();
 
         $requesturl = $comhandler->build_request($url, $service, $timestamp);

@@ -62,7 +62,7 @@ class block_pseudolearner_config_controller {
 
         echo '</form>';
 
-        echo "<a href=\"" . get_config('pseudolearner','url') . "\">LINK</a>";
+        echo "<a href=\"" . get_config('pseudolearner', 'url') . "\">LINK</a>";
     }
 
     /**

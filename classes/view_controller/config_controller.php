@@ -23,7 +23,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/instance_controller.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/PseudonymityProviderHelper.php');
 
 class block_pseudolearner_config_controller {
 

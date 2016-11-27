@@ -28,17 +28,34 @@ require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/content_c
 
 class block_pseudolearner extends block_base {
 
+    /**
+     * Init function
+     */
     public function init() {
         $this->title = get_string('pluginname', 'block_pseudolearner');
     }
 
+    /**
+     * On deletion of instance
+     *
+     * @return bool
+     */
     public function instance_delete() {
         global $DB;
         $courseid = $this->page->course->id;
+
         $DB->delete_records('block_pseudolearner', array('courseid' => $courseid));
+        $DB->delete_records('block_pseudolearner_u_course', array('courseid' => $courseid));
+        $DB->delete_records('block_pseudolearner_request', array('courseid' => $courseid));
+
         return true;
     }
 
+    /**
+     * On creation of instance
+     *
+     * @return bool
+     */
     public function instance_create() {
         global $DB;
         $courseid = $this->page->course->id;
@@ -48,6 +65,11 @@ class block_pseudolearner extends block_base {
         return true;
     }
 
+    /**
+     * Returns content object
+     *
+     * @return stdClass|stdObject|string
+     */
     public function get_content() {
         global $USER;
 
@@ -68,21 +90,14 @@ class block_pseudolearner extends block_base {
         // User/index.php expect course context, so get one if page has module context.
         $currentcontext = $this->page->context->get_course_context(false);
 
-        if (! empty($this->config->text)) {
-            $this->content->text = $this->config->text;
-        }
-
         $this->content = new stdClass();
-        $this->content->text = "Not configured yet";
-        if (empty($currentcontext)) {
+        $this->content->text = get_string('content_notconfigured_notifyadmin','block_pseudolearner');
+
+        if (empty($currentcontext) || empty(get_config('pseudolearner','servicename')) || empty(get_config('pseudolearner','url')) || empty(get_config('pseudolearner','securitytoken')) ){
             return $this->content;
         }
 
         $courseid = $this->page->course->id;
-
-        if ($courseid == SITEID) {
-            $this->content->text .= "site context";
-        }
 
         $controller = new block_pseudolearner_content_controller($courseid, $currentcontext, $this->config);
         $this->content = $controller->get_content($USER->id);
@@ -105,12 +120,6 @@ class block_pseudolearner extends block_base {
     }
 
     public function has_config() {
-        return true;
-    }
-
-    public function cron() {
-        mtrace( "Hey, my cron script is running" );
-        // Do something.
         return true;
     }
 }

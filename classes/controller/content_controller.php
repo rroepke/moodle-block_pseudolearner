@@ -22,6 +22,9 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
+
+
 class block_pseudolearner_content_controller {
 
     /** @var int ID of course */
@@ -53,24 +56,15 @@ class block_pseudolearner_content_controller {
     /**
      * Returns block content
      *
+     * @param $userid ID of the user
      * @return stdClass
      */
-    public function get_content() {
+    public function get_content($userid) {
         $content = new stdClass();
         if (has_capability('moodle/block:edit', $this->context)) {
-            if (get_config('pseudolearner', 'url') === '' || !$instance = $this->get_instance()) {
-                $content->text = "can edit settings & has no instance";
-            } else {
-                $content->text = "can edit settings & has instance";
-                $content->footer = "<a href=\"" . $this->get_link("config_view") . "\"><button>CONFIGURE ME</button></a>";
-            }
+            $content = $this->get_teacher_content($userid, $content);
         } else {
-            if (get_config('pseudolearner', 'url') === '' || !$instance = $this->get_instance()) {
-                $content->text = "Not configured yet.";
-            } else {
-                $content->text = "cannot edit settings & has instance";
-                $content->footer = "<a href=\"" . $this->get_link("view") . "\"><button>MANAGE</button></a>";
-            }
+            $content = $this->get_user_content($userid, $content);
         }
 
         return $content;
@@ -86,5 +80,62 @@ class block_pseudolearner_content_controller {
         $url = new moodle_url("/blocks/pseudolearner/" . $page . ".php",
             array("id" => $this->courseid, 'show' => 'view'));
         return $url->out();
+    }
+
+    /**
+     * Returns content for user
+     *
+     * @param $content
+     * @return mixed
+     */
+    public function get_user_content($userid, $content) {
+
+        $uc = new block_pseudolearner_user_controller($userid,$this->courseid);
+
+        $pseudonym = $uc->is_registered();
+        $consent = $uc->get_consent();
+
+        $text = "";
+
+        $text .= "<p>";
+        $text .= get_string('content_pseudonym','block_pseudolearner');
+        $text .= "<br>";
+        $text .= "<span class=\"label label-".($pseudonym?"success":"default")."\">"
+            . ($pseudonym ? get_string('content_registered','block_pseudolearner') : get_string('content_notregistered','block_pseudolearner'))
+            . "</span><br>";
+
+        $text .= "</p>";
+
+        $text .= "<p>";
+        $text .= get_string('content_anonymous_tracking','block_pseudolearner');
+        $text .= "<br>";
+        $text .= "<span class=\"label label-".($consent?"success":"default")."\">"
+            . ($consent ? get_string('content_activated','block_pseudolearner') : get_string('content_notactivated','block_pseudolearner'))
+            . "</span><br>";
+
+        $text .= "</p>";
+
+        $footer = "<p>";
+        $footer .= "<a href=\"" . $this->get_link("view") . "\">";
+        $footer .= "<button class=\"btn btn-default\">".get_string("view")."</button></a>";
+        $footer .= "</p>";
+        $content->text = $text;
+        $content->footer = $footer;
+        return $content;
+    }
+
+    private function get_teacher_content($userid, $content) {
+
+        $text = "";
+
+        $text .= "<p>";
+        $text .= "<a href=\"" . $this->get_link("config_view") . "\">";
+        $text .= "<button class=\"btn btn-default\">".get_string("settings")."</button></a>";
+        $text .= "<br>";
+        $text .= "</p>";
+
+        $content->text = $text;
+
+        return $content;
     }
 }

@@ -32,12 +32,12 @@ $settings->add(new admin_setting_heading('sampleheader',
 $settings->add(new admin_setting_configtext('pseudolearner/servicename',
     get_string('config_label_servicename', 'block_pseudolearner'),
     get_string('config_description_servicename', 'block_pseudolearner'),
-    str_replace(' ', '', get_course(1)->shortname)));
+    null));
 
 $settings->add(new admin_setting_configtext('pseudolearner/url',
                                                 get_string('config_label_url', 'block_pseudolearner'),
                                                 get_string('config_description_url', 'block_pseudolearner'),
-                                                'https://mypseudoprovider.net'));
+                                                null));
 
 $settings->add(new admin_setting_configtext('pseudolearner/securitytoken',
     get_string('config_label_securitytoken', 'block_pseudolearner'),

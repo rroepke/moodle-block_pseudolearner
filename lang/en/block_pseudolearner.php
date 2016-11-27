@@ -36,13 +36,21 @@ $string['config_label_hash'] = 'Hash Function';
 $string['config_description_hash'] = 'Hash function that is used to compute Message Authentication Codes of the data';
 $string['pseudolearner:addinstance'] = 'Add a pseudolearner block';
 $string['pseudolearner:myaddinstance'] = 'Add a pseudolearner block to my moodle';
-$string['pluginname'] = 'pseudolearner';
+$string['pluginname'] = 'Pseudo Learner';
 $string['language'] = 'en';
 $string['page_title_view'] = 'Overview';
 $string['page_title_pseudonym'] = 'Pseudonym';
 $string['page_title_courses'] = 'Courses';
 $string['page_sub_header_options'] = 'Options';
 $string['page_sub_header_courselist'] = 'Other Courses';
+
+$string['content_notconfigured_notifyadmin'] = 'The plugin is not properly configured. Please notify administrator';
+$string['content_pseudonym'] = 'Pseudonym';
+$string['content_anonymous_tracking'] = 'Anonymous Tracking';
+$string['content_registered'] = 'REGISTERED';
+$string['content_notregistered'] = 'NOT REGISTERED';
+$string['content_activated'] = 'ACTIVATED';
+$string['content_notactivated'] = 'NOT ACTIVATED';
 
 $string['pseudonym_your_name'] = 'Your name';
 $string['pseudonym_registered'] = 'Registered';

@@ -34,6 +34,12 @@ $mac = required_param('mac', PARAM_TEXT);
 $url = get_config('pseudolearner', 'url');
 $key = get_config('pseudolearner', 'securitytoken');
 $chiffre = get_config('pseudolearner', 'chiffre');
+if (empty($chiffre)){
+    $chiffre = 'AES-256-CBC';
+}
+if (empty($hash)){
+    $hash = 'sha256';
+}
 $hash = get_config('pseudolearner', 'hash');
 
 $userid = $USER->id;

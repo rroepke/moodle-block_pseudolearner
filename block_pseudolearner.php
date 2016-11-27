@@ -96,7 +96,7 @@ class block_pseudolearner extends block_base {
         if (empty($currentcontext)
             || (get_config('pseudolearner', 'servicename') == "")
             || (get_config('pseudolearner', 'url') == "")
-            || (get_config('pseudolearner', 'securitytoken') == "")){
+            || (get_config('pseudolearner', 'securitytoken') == "")) {
             return $this->content;
         }
 

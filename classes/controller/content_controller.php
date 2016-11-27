@@ -98,12 +98,17 @@ class block_pseudolearner_content_controller {
         $text = "";
 
         $text .= "<p>";
-        $text .= get_string('content_pseudonym','block_pseudolearner');
+        $text .= get_string('content_pseudonym', 'block_pseudolearner');
         $text .= "<br>";
         $text .= "<span class=\"label label-";
         $text .= ($pseudonym ? "success" : "default");
         $text .= "\">";
-        $text .= ($pseudonym ? get_string('content_registered', 'block_pseudolearner') : get_string('content_notregistered', 'block_pseudolearner'));
+        if ($pseudonym) {
+            $text .= get_string('content_registered', 'block_pseudolearner');
+        } else {
+            $text .= get_string('content_notregistered', 'block_pseudolearner');
+        }
+
         $text .= "</span>";
         $text .= "<br>";
 
@@ -115,7 +120,11 @@ class block_pseudolearner_content_controller {
         $text .= "<span class=\"label label-";
         $text .= ($consent ? "success" : "default");
         $text .= "\">";
-        $text .= ($consent ? get_string('content_activated', 'block_pseudolearner') : get_string('content_notactivated', 'block_pseudolearner'));
+        if ($consent) {
+            $text .= get_string('content_activated', 'block_pseudolearner');
+        } else {
+            $text .= get_string('content_notactivated', 'block_pseudolearner');
+        }
         $text .= "</span>";
         $text .= "<br>";
 

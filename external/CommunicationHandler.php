@@ -41,7 +41,7 @@ class CommunicationHandler {
      * @param string $code
      */
     public function validate_response_params($params, $code = null) {
-        $properties = ['code','timestamp'];
+        $properties = ['code', 'timestamp'];
         if (is_null($code) || $code == self::CODE_SUCCESS) {
             $properties[] = 'pseudonym';
         }
@@ -89,7 +89,7 @@ class CommunicationHandler {
      * @return string
      */
     public function build_request($url, $service, $timestamp = null) {
-        function endsWith($str, $sub) {
+        function ends_with($str, $sub) {
             return (substr($str, strlen($str) - strlen($sub)) === $sub);
         }
 
@@ -112,7 +112,7 @@ class CommunicationHandler {
 
         $query = http_build_query($params);
 
-        if (strpos($url, '?') > 0 && endsWith($url, '?')) {
+        if (strpos($url, '?') > 0 && ends_with($url, '?')) {
             $request = $url . $query;
         } else if (strpos($url, '?') > 0) {
             $request = $url . '&' . $query;

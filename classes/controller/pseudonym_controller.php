@@ -63,5 +63,4 @@ class block_pseudolearner_pseudonym_controller {
             return null;
         }
     }
-
 }

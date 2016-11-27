@@ -24,20 +24,37 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_content_controller {
 
+    /** @var int ID of course */
     private $courseid = null;
+    /** @var null context of current page */
     private $context = null;
 
+    /**
+     * block_pseudolearner_content_controller constructor.
+     * @param $courseid
+     * @param $context
+     */
     public function __construct($courseid, $context) {
         $this->courseid = $courseid;
         $this->context = $context;
     }
 
+    /**
+     * Returns instance
+     *
+     * @return mixed
+     */
     public function get_instance() {
         global $DB;
 
         return $DB->get_record("block_pseudolearner", array("courseid" => $this->courseid));
     }
 
+    /**
+     * Returns block content
+     *
+     * @return stdClass
+     */
     public function get_content() {
         $content = new stdClass();
         if (has_capability('moodle/block:edit', $this->context)) {
@@ -59,6 +76,12 @@ class block_pseudolearner_content_controller {
         return $content;
     }
 
+    /**
+     * Returns link to a page
+     *
+     * @param $page
+     * @return string
+     */
     public function get_link($page) {
         $url = new moodle_url("/blocks/pseudolearner/" . $page . ".php",
             array("id" => $this->courseid, 'show' => 'view'));

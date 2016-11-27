@@ -31,7 +31,6 @@ abstract class block_pseudolearner_basic_controller {
     protected $courseid = null;
     /** @var block_pseudolearner_user_controller Controller instance for user */
     protected $usercontroller = null;
-
     /** @var block_pseudolearner_template_builder View builder */
     protected $view = null;
     /** @var string File name for wrapper */

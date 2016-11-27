@@ -15,15 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details.
+ * pseudolearner external functions and service definitions.
  *
  * @package block_pseudolearner
  * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016112201;                // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2012112900;                // Requires this Moodle version.
-$plugin->component = 'block_pseudolearner';     // Full name of the plugin (used for diagnostics).
-$plugin->cron = 300;
+defined('MOODLE_INTERNAL') || die;
+
+//$functions = array(
+//
+//    'block_pseudolearner_add_pseudonym' => array(
+//        'classname' => 'block_pseudolearner_external',
+//        'methodname' => 'add_pseudonym',
+//        'description' => 'Adds pseudonym for user',
+//        'type' => 'write',
+//        'capabilities' => 'moodle/block:edit'
+//    ),
+//);

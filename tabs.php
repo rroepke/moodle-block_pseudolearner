@@ -30,17 +30,14 @@ $activated = array();
 
 $currenttab = optional_param('show', null, PARAM_TEXT);
 
-// The view -> student mode.
 $viewurl = new moodle_url ('/blocks/pseudolearner/view.php', array(
     'id' => $courseid, 'show' => 'view'));
 $row [] = new tabobject ('view', $viewurl->out(), get_string('page_title_view', 'block_pseudolearner'));
 
-// The view -> student mode.
 $viewurl = new moodle_url ('/blocks/pseudolearner/pseudonym_view.php', array(
     'id' => $courseid, 'show' => 'pseudonym'));
 $row [] = new tabobject ('pseudonym', $viewurl->out(), get_string('page_title_pseudonym', 'block_pseudolearner'));
 
-// The view -> student mode.
 $viewurl = new moodle_url ('/blocks/pseudolearner/courses_view.php', array(
     'id' => $courseid, 'show' => 'courses'));
 $row [] = new tabobject ('courses', $viewurl->out(), get_string('page_title_courses', 'block_pseudolearner'));

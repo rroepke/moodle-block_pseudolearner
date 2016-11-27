@@ -25,6 +25,7 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/view_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/communication_handler.php');
 
 $courseid = required_param('id', PARAM_INT);
 $file = basename(__FILE__, '.php');
@@ -44,6 +45,11 @@ $controller = new block_pseudolearner_view_controller($courseid, $usercontroller
 
 require('navigation.php');
 
+$PAGE->set_url('/blocks/pseudolearner/view.php');
+$PAGE->set_title(format_string(get_string('page_title_view', 'block_pseudolearner')));
+$PAGE->set_heading(format_string(get_string('page_title_view', 'block_pseudolearner')));
+$PAGE->set_pagelayout('standard');
+
 // Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
     $consent = optional_param('consent', null, PARAM_TEXT);
@@ -59,21 +65,28 @@ if (data_submitted() && confirm_sesskey()) {
     $register = optional_param('register', false, PARAM_BOOL);
 
     if ($register) {
-        // TODO enable when implemented.
-        // $url = new moodle_url('register_view.php', array('id' => $courseid));
-        // redirect($url);
-        // TODO disable when implemented above.
-        $usercontroller->register_pseudonym();
+
+        $key = get_config('pseudolearner','securitytoken');
+        $chiffre = get_config('pseudolearner','chiffre');
+        $hash = get_config('pseudolearner','hash');
+        $comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid, $courseid);
+
+        $url = get_config('pseudolearner','url');
+        $service = get_config('pseudolearner','servicename');
+        // TODO origin needs to be determined automatically
+        $origin = $PAGE->url->out()."?id=".$courseid."&show=view";
+        // $origin = "http://moodle.dev/blocks/pseudolearner/view.php?id=3&show=view";
+        $timestamp = time();
+
+        $requesturl = $comhandler->build_request($url, $service, $timestamp);
+
+        redirect($requesturl);
     }
 
     $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
+
     redirect($url);
 }
-
-$PAGE->set_url('/blocks/pseudolearner/view.php');
-$PAGE->set_title(format_string(get_string('page_title_view', 'block_pseudolearner')));
-$PAGE->set_heading(format_string(get_string('page_title_view', 'block_pseudolearner')));
-$PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();
 

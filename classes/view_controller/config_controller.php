@@ -23,19 +23,29 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/instance_controller.php');
-
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/PseudonymityProviderHelper.php');
 
 class block_pseudolearner_config_controller {
 
+    /** @var int ID of course */
     private $courseid = null;
+    /** @var null context of current page */
     private $context = null;
 
+    /**
+     * block_pseudolearner_config_controller constructor.
+     * @param $courseid
+     * @param $context
+     */
     public function __construct($courseid, $context) {
         $this->courseid = $courseid;
         $this->context = $context;
         $this->instance = new block_pseudolearner_instance_controller($courseid);
     }
 
+    /**
+     * Render content
+     */
     public function render() {
 
         echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
@@ -55,6 +65,9 @@ class block_pseudolearner_config_controller {
         echo "<a href=\"" . get_config('pseudolearner','url') . "\">LINK</a>";
     }
 
+    /**
+     * Save configuration
+     */
     public function save() {
         $this->instance->set_configured(true);
     }

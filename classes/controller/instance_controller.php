@@ -24,6 +24,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_instance_controller {
 
+    /** @var string name of table */
     private $tablename = 'block_pseudolearner';
 
     /** @var int ID of the course */

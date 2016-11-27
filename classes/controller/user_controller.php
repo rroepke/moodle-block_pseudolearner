@@ -55,6 +55,7 @@ class block_pseudolearner_user_controller {
 
     /**
      * Creates a user record
+     * @param $userid
      */
     public function create_user_record($userid) {
         global $DB;
@@ -130,7 +131,7 @@ class block_pseudolearner_user_controller {
      * Deletes pseudonym
      */
     public function delete_pseudonym() {
-        // TODO handle pseudonym deletion.
+        $this->set_pseudonym(null);
 
         $this->set_consent_for_all(false);
 
@@ -139,9 +140,11 @@ class block_pseudolearner_user_controller {
 
     /**
      * Registers pseudonym
+     *
+     * @param $pseudonym
      */
-    public function register_pseudonym() {
-        // TODO handle pseudonym registration.
+    public function register_pseudonym($pseudonym) {
+        $this->set_pseudonym($pseudonym);
 
         $this->set_registered(true);
     }
@@ -168,6 +171,34 @@ class block_pseudolearner_user_controller {
             );
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Sets pseudonym
+     *
+     * @param $pseudonym
+     */
+    public function set_pseudonym($pseudonym) {
+        global $DB;
+
+        if ($DB->record_exists($this->usercoursetable, array(
+            'userid' => $this->userid))) {
+
+            $record = $DB->get_record(
+                $this->usercoursetable,
+                array('userid' => $this->userid)
+            );
+
+            $record->pseudonym = $pseudonym;
+
+            $DB->update_record(
+                $this->usercoursetable,
+                $record
+            );
+        } else {
+            $this->create_user_record($this->userid);
+            $this->set_pseudonym($pseudonym);
         }
     }
 

@@ -168,5 +168,44 @@ function xmldb_block_pseudolearner_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2016100601, 'pseudolearner');
     }
 
+    if ($oldversion < 2016112000) {
+
+        // Define field pseudonym to be added to block_pseudolearner_user.
+        $table = new xmldb_table('block_pseudolearner_user');
+        $field = new xmldb_field('pseudonym', XMLDB_TYPE_CHAR, '64', null, null, null, null, 'registered');
+
+        // Conditionally launch add field pseudonym.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016112000, 'pseudolearner');
+    }
+
+    if ($oldversion < 2016112201) {
+
+        // Define table block_pseudolearner_request to be created.
+        $table = new xmldb_table('block_pseudolearner_request');
+
+        // Adding fields to table block_pseudolearner_request.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('courseid', XMLDB_TYPE_INTEGER, '20', null, null, null, null);
+        $table->add_field('timestamp', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table block_pseudolearner_request.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for block_pseudolearner_request.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Pseudolearner savepoint reached.
+        upgrade_block_savepoint(true, 2016112201, 'pseudolearner');
+    }
+
+
     return true;
 }

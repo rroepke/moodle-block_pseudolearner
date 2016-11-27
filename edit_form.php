@@ -25,4 +25,6 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_pseudolearner_edit_form extends block_edit_form {
 
+    // this class in mandatory for block plugin usage
+
 }

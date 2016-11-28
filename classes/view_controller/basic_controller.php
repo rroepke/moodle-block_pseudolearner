@@ -29,8 +29,8 @@ abstract class block_pseudolearner_basic_controller {
 
     /** @var int ID of the course */
     protected $courseid = null;
-    /** @var block_pseudolearner_user_controller Controller instance for user */
-    protected $usercontroller = null;
+    /** @var Controller instance for user */
+    protected $controller = null;
     /** @var block_pseudolearner_template_builder View builder */
     protected $view = null;
     /** @var string File name for wrapper */
@@ -44,11 +44,11 @@ abstract class block_pseudolearner_basic_controller {
      * block_pseudolearner_basic_controller constructor.
      *
      * @param $courseid
-     * @param $usercontroller
+     * @param $controller
      */
-    public function __construct($courseid, $usercontroller) {
+    public function __construct($courseid, $controller) {
         $this->courseid = $courseid;
-        $this->usercontroller = $usercontroller;
+        $this->controller = $controller;
         $this->view = new block_pseudolearner_template_builder();
         $this->view->set_template('wrapper_view');
         $this->title = get_string('page_title_' . $this->title, 'block_pseudolearner');

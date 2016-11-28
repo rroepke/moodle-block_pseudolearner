@@ -41,9 +41,9 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
     public function get_option_buttons() {
         $buttons = array();
 
-        $registered = $this->usercontroller->is_registered();
+        $registered = $this->controller->is_registered();
 
-        $consentaction = $this->usercontroller->get_consent() ? 'withdraw' : 'give';
+        $consentaction = $this->controller->get_consent() ? 'withdraw' : 'give';
 
         if ($registered) {
             // Pseudonym registered.
@@ -93,9 +93,9 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
 
-        if (!$this->usercontroller->is_registered()) {
+        if (!$this->controller->is_registered()) {
             $link = 'link_grey';
-        } else if ($this->usercontroller->get_consent()) {
+        } else if ($this->controller->get_consent()) {
             $link = 'link_green';
         } else {
             $link = 'link_red';

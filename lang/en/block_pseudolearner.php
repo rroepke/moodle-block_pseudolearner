@@ -41,6 +41,7 @@ $string['language'] = 'en';
 $string['page_title_view'] = 'Overview';
 $string['page_title_pseudonym'] = 'Pseudonym';
 $string['page_title_courses'] = 'Courses';
+$string['page_title_settings'] = 'Settings (Teachers only)';
 $string['page_sub_header_options'] = 'Options';
 $string['page_sub_header_courselist'] = 'Other Courses';
 
@@ -71,3 +72,4 @@ $string['button_description_withdraw_consent'] = 'Click here to withdraw your co
 $string['button_description_give_consent'] = 'Click here to give your consent for tracking learning data with your pseudonym in this course.';
 $string['button_description_withdraw_all_consent'] = 'Click here to withdraw your consent for tracking learning data with your pseudonym in all courses.';
 $string['button_description_give_all_consent'] = 'Click here to give your consent for tracking learning data with your pseudonym in all courses.';
+$string['button_description_withdraw_all_users_consent'] = 'Click here to withdraw the consent of all users for tracking learning data with their pseudonyms.';

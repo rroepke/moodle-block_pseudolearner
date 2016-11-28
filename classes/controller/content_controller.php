@@ -76,9 +76,9 @@ class block_pseudolearner_content_controller {
      * @param $page
      * @return string
      */
-    public function get_link($page) {
+    public function get_link($page,$show = 'view') {
         $url = new moodle_url("/blocks/pseudolearner/" . $page . ".php",
-            array("id" => $this->courseid, 'show' => 'view'));
+            array("id" => $this->courseid, 'show' => $show));
         return $url->out();
     }
 
@@ -152,7 +152,7 @@ class block_pseudolearner_content_controller {
 
         $text .= "<p>";
         $text .= "<a href=\"";
-        $text .= $this->get_link("config_view");
+        $text .= $this->get_link("settings_view","settings");
         $text .= "\">";
         $text .= "<button class=\"btn btn-default\">";
         $text .= get_string("settings");

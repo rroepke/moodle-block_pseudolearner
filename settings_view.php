@@ -21,12 +21,12 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/config_controller.php');
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/settings_controller.php');
+require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/course_controller.php');
 
-$id = required_param('id', PARAM_INT);
-
-$courseid = $id;
+$courseid = required_param('id', PARAM_INT);
+$file = basename(__FILE__, '.php');
+$show = optional_param('show', $file, PARAM_TEXT);
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
@@ -42,27 +42,36 @@ if (!has_capability('moodle/block:edit', $context, $userid)) {
     redirect($url);
 }
 
-$uc = new block_pseudolearner_course_controller($userid, $courseid);
+$usercontroller = new block_pseudolearner_user_controller($userid, $courseid);
+$coursecontroller = new block_pseudolearner_course_controller($courseid, $context);
 
-$controller = new block_pseudolearner_settings_controller($courseid, $uc);
+$controller = new block_pseudolearner_settings_controller($courseid, $coursecontroller);
 
+// Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
-    $save = optional_param('save', false, PARAM_BOOL);
 
-    if ($save) {
-        $controller->save();
+    $consent = optional_param('consent', null, PARAM_TEXT);
+
+    if (!is_null($consent)) {
+        if ($consent == 'withdraw') {
+            $coursecontroller->set_consent_for_all(false);
+        }
     }
 
-    $url = new moodle_url('/course/view.php', array('id' => $courseid));
+    $url = new moodle_url('settings_view.php', array('id' => $courseid, 'show' => 'settings'));
     redirect($url);
 }
 
-$PAGE->set_url('/blocks/pseudolearner/config_view.php');
+require('navigation.php');
+
+$PAGE->set_url('/blocks/pseudolearner/settings_view.php');
 $PAGE->set_title(format_string("test"));
 $PAGE->set_heading(format_string("test123"));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();
+
+require('tabs.php');
 
 echo $controller->render();
 

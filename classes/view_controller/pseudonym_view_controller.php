@@ -41,7 +41,7 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
     public function get_option_buttons() {
         $buttons = array();
 
-        $registered = $this->usercontroller->is_registered();
+        $registered = $this->controller->is_registered();
 
         if ($registered) {
             // Pseudonym registered.
@@ -69,7 +69,7 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
 
         $template->assign('user_fullname', fullname($USER));
 
-        $timestamp = $this->usercontroller->get_registered_time();
+        $timestamp = $this->controller->get_registered_time();
 
         if ('en' == get_string('language', 'block_pseudolearner')) {
             $format = 'F j, Y, g:i a';

@@ -42,6 +42,12 @@ $viewurl = new moodle_url ('/blocks/pseudolearner/courses_view.php', array(
     'id' => $courseid, 'show' => 'courses'));
 $row [] = new tabobject ('courses', $viewurl->out(), get_string('page_title_courses', 'block_pseudolearner'));
 
+if (has_capability('moodle/block:edit', $context)) {
+    $viewurl = new moodle_url ('/blocks/pseudolearner/settings_view.php', array(
+        'id' => $courseid, 'show' => 'settings'));
+    $row [] = new tabobject ('settings', $viewurl->out(), get_string('page_title_settings', 'block_pseudolearner'));
+
+}
 if (count($row) >= 1) {
     $tabs [] = $row;
     print_tabs($tabs, $currenttab, $inactive, $activated);

@@ -41,7 +41,7 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
     public function get_option_buttons() {
         $buttons = array();
 
-        $registered = $this->usercontroller->is_registered();
+        $registered = $this->controller->is_registered();
 
         if ($registered) {
 
@@ -74,7 +74,7 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
         $firsttemplate = new block_pseudolearner_template_builder();
         $firsttemplate->set_template('status');
 
-        if ($this->usercontroller->get_consent()) {
+        if ($this->controller->get_consent()) {
             $link = 'link_green';
         } else {
             $link = 'link_red';
@@ -95,14 +95,14 @@ class block_pseudolearner_courses_view_controller extends block_pseudolearner_ba
         $overviewoptions->set_template('courselist');
         $overviewoptions->assign('id', $this->courseid);
 
-        if ($this->usercontroller->get_consent()) {
+        if ($this->controller->get_consent()) {
             $link = 'link_green';
         } else {
             $link = 'link_red';
         }
 
         $overviewoptions->assign('link', $link);
-        $overviewoptions->assign('courses', $this->usercontroller->get_courses());
+        $overviewoptions->assign('courses', $this->controller->get_courses());
 
         return $overviewoptions->load_template();
     }

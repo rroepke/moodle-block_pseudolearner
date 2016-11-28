@@ -61,6 +61,7 @@ class block_pseudolearner_content_controller {
      */
     public function get_content($userid) {
         $content = new stdClass();
+        $content->text = "";
         if (has_capability('moodle/block:edit', $this->context)) {
             $content = $this->get_teacher_content($userid, $content);
         } else {
@@ -130,27 +131,76 @@ class block_pseudolearner_content_controller {
 
         $text .= "</p>";
 
-        $footer = "<p>";
-        $footer .= "<a href=\"";
-        $footer .= $this->get_link("view");
-        $footer .= "\">";
-        $footer .= "<button class=\"btn btn-default\">";
-        $footer .= get_string("view");
-        $footer .= "</button>";
-        $footer .= "</a>";
-        $footer .= "</p>";
+        $text .= "<p>";
+        $text .= "<a href=\"";
+        $text .= $this->get_link("view");
+        $text .= "\">";
+        $text .= "<button class=\"btn btn-default\">";
+        $text .= get_string("view");
+        $text .= "</button>";
+        $text .= "</a>";
+        $text .= "</p>";
 
-        $content->text = $text;
-        $content->footer = $footer;
+        $content->text .= $text;
 
         return $content;
     }
 
     private function get_teacher_content($userid, $content) {
 
-        $text = "";
+        $content = $this->get_user_content($userid, $content);
 
-        $text .= "<p>";
+//        $uc = new block_pseudolearner_user_controller($userid, $this->courseid);
+//
+//        $pseudonym = $uc->is_registered();
+//        $consent = $uc->get_consent();
+//
+//        $text = "";
+//
+//        $text .= "<p>";
+//        $text .= get_string('content_pseudonym', 'block_pseudolearner');
+//        $text .= "<br>";
+//        $text .= "<span class=\"label label-";
+//        $text .= ($pseudonym ? "success" : "default");
+//        $text .= "\">";
+//        if ($pseudonym) {
+//            $text .= get_string('content_registered', 'block_pseudolearner');
+//        } else {
+//            $text .= get_string('content_notregistered', 'block_pseudolearner');
+//        }
+//
+//        $text .= "</span>";
+//        $text .= "<br>";
+//
+//        $text .= "</p>";
+//
+//        $text .= "<p>";
+//        $text .= get_string('content_anonymous_tracking', 'block_pseudolearner');
+//        $text .= "<br>";
+//        $text .= "<span class=\"label label-";
+//        $text .= ($consent ? "success" : "default");
+//        $text .= "\">";
+//        if ($consent) {
+//            $text .= get_string('content_activated', 'block_pseudolearner');
+//        } else {
+//            $text .= get_string('content_notactivated', 'block_pseudolearner');
+//        }
+//        $text .= "</span>";
+//        $text .= "<br>";
+//
+//        $text .= "</p>";
+//
+//        $footer = "<p>";
+//        $footer .= "<a href=\"";
+//        $footer .= $this->get_link("view");
+//        $footer .= "\">";
+//        $footer .= "<button class=\"btn btn-default\">";
+//        $footer .= get_string("view");
+//        $footer .= "</button>";
+//        $footer .= "</a>";
+//        $footer .= "</p>";
+
+        $text  = "<p>";
         $text .= "<a href=\"";
         $text .= $this->get_link("settings_view","settings");
         $text .= "\">";
@@ -160,7 +210,7 @@ class block_pseudolearner_content_controller {
         $text .= "</a>";
         $text .= "</p>";
 
-        $content->text = $text;
+        $content->text .= $text;
 
         return $content;
     }

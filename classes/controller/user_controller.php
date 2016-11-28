@@ -182,18 +182,18 @@ class block_pseudolearner_user_controller {
     public function set_pseudonym($pseudonym) {
         global $DB;
 
-        if ($DB->record_exists($this->usercoursetable, array(
+        if ($DB->record_exists($this->usertable, array(
             'userid' => $this->userid))) {
 
             $record = $DB->get_record(
-                $this->usercoursetable,
+                $this->usertable,
                 array('userid' => $this->userid)
             );
 
             $record->pseudonym = $pseudonym;
 
             $DB->update_record(
-                $this->usercoursetable,
+                $this->usertable,
                 $record
             );
         } else {
@@ -291,6 +291,23 @@ class block_pseudolearner_user_controller {
         return $DB->get_field(
             $this->usertable,
             'timestamp',
+            array(
+                'userid' => $this->userid,
+            )
+        );
+    }
+
+    /**
+     * Returns pseudonym of user
+     *
+     * @return mixed
+     */
+    public function get_pseudonym() {
+        global $DB;
+
+        return $DB->get_field(
+            $this->usertable,
+            'pseudonym',
             array(
                 'userid' => $this->userid,
             )

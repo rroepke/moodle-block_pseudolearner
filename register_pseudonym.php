@@ -62,6 +62,8 @@ if ($code == $comhandler::CODE_SUCCESS) {
 
     $usercontroller = new block_pseudolearner_user_controller($userid);
 
+    var_dump($pseudonym);
+    
     $usercontroller->register_pseudonym($pseudonym);
 
     $courseid = $comhandler->get_courseid_of_last_request();

@@ -63,12 +63,12 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      * @param null $timestamp
      * @return string
      */
-    public function build_web_request($url, $service, $username = 'user', $password = 'password', $timestamp = null) {
+    public function build_web_request($url, $service, $timestamp = null) {
         if (is_null($timestamp)) {
             $timestamp = time();
         }
 
-        $result = parent::build_web_request($url, $service, $username, $password, $timestamp);
+        $result = parent::build_web_request($url, $service, $timestamp);
 
         $this->delete_requests();
 

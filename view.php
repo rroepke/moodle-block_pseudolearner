@@ -78,7 +78,7 @@ if (data_submitted() && confirm_sesskey()) {
         $origin = $PAGE->url->out() . "?id=" . $courseid . "&show=view";
         $timestamp = time();
 
-        $requesturl = $comhandler->build_web_request($url, $service, 'rene','6vVrfhBW');
+        $requesturl = $comhandler->build_web_request($url, $service);
 
         redirect($requesturl);
     }
@@ -93,7 +93,7 @@ echo $OUTPUT->header();
 require('tabs.php');
 
 $code = optional_param('code', null, PARAM_TEXT);
-if (!is_null($code)){
+if (!is_null($code)) {
     echo '<div class="alert alert-'.$code.'">' . get_string('pseudonym_registration_'.$code, 'block_pseudolearner') . '</div>';
 }
 

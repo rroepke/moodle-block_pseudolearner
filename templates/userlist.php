@@ -35,7 +35,10 @@ global $USER;
                     <img class="pl_responsive_img_tiny"
                          src="pix/<?php echo ($user->consent) ? 'link_green' : 'link_red'; ?>.gif">
                     <b>
-                        <a href="<?php echo $user->url; ?>"><?php echo fullname($user->user); ?></a><?php echo (($user->userid == $USER->id)?" ".get_string('userlist_you', 'block_pseudolearner'):""); ?>
+                        <a href="<?php echo $user->url; ?>">
+                            <?php echo fullname($user->user); ?>
+                        </a>
+                        <?php echo (($user->userid == $USER->id) ? " " . get_string('userlist_you', 'block_pseudolearner') : ""); ?>
                     </b>
 
                 </div>

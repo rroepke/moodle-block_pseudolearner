@@ -26,7 +26,9 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/pseudonym_view_controller.php');
 
-$courseid = required_param('id', PARAM_INT);
+$id = required_param('id', PARAM_INT);
+
+$courseid = $id;
 $file = basename(__FILE__, '.php');
 $show = optional_param('show', $file, PARAM_TEXT);
 
@@ -67,6 +69,11 @@ $PAGE->set_pagelayout('standard');
 echo $OUTPUT->header();
 
 require('tabs.php');
+
+$code = optional_param('code', null, PARAM_TEXT);
+if (!is_null($code)){
+    echo '<div class="alert alert-'.$code.'">' . get_string('pseudonym_registration_'.$code, 'block_pseudolearner') . '</div>';
+}
 
 echo $controller->render();
 

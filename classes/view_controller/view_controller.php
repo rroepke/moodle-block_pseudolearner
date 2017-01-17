@@ -68,6 +68,17 @@ class block_pseudolearner_view_controller extends block_pseudolearner_basic_cont
             );
             $buttons[] = $button;
 
+            $context = context_course::instance($this->courseid);
+
+            if (has_capability('moodle/block:edit', $context)) {
+                $button = array('caption' => get_string('button_caption_view_settings', 'block_pseudolearner'),
+                    'value' => 1,
+                    'name' => 'settings',
+                    'description' => get_string('button_description_view_settings', 'block_pseudolearner')
+                );
+                $buttons[] = $button;
+            }
+
         } else {
 
             // No pseudonym registered.

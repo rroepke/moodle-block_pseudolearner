@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
     <div class="grid">
         <div class="col_m_100 bp_align_left-middle pl_align_center">
             <div class="pl_align_center pl_v_align_child">
-                <img class="pl_responsive_img" src="pix/id_card.gif">
+                <img class="pl_responsive_img" src="pix/id_card2.gif">
             </div>
         </div>
         <div class="col_m_100 bp_align_left-middle">

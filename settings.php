@@ -44,9 +44,9 @@ $settings->add(new admin_setting_configtext('pseudolearner/securitytoken',
     get_string('config_description_securitytoken', 'block_pseudolearner'),
     null));
 
-$settings->add(new admin_setting_configtext('pseudolearner/chiffre',
-    get_string('config_label_chiffre', 'block_pseudolearner'),
-    get_string('config_description_chiffre', 'block_pseudolearner'),
+$settings->add(new admin_setting_configtext('pseudolearner/cipher',
+    get_string('config_label_cipher', 'block_pseudolearner'),
+    get_string('config_description_cipher', 'block_pseudolearner'),
     'AES-256-CBC'));
 
 $settings->add(new admin_setting_configtext('pseudolearner/hash',

@@ -32,6 +32,7 @@ if (!$usercontroller->is_registered() && $file != 'view' && !has_capability('moo
 if (data_submitted() && confirm_sesskey()) {
     $pseudonym = optional_param('pseudonym', false, PARAM_BOOL);
     $courses = optional_param('courses', false, PARAM_BOOL);
+    $settings = optional_param('settings', false, PARAM_BOOL);
 
     if ($pseudonym) {
         $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym'));
@@ -40,6 +41,11 @@ if (data_submitted() && confirm_sesskey()) {
 
     if ($courses) {
         $url = new moodle_url('courses_view.php', array('id' => $courseid, 'show' => 'courses'));
+        redirect($url);
+    }
+
+    if ($settings) {
+        $url = new moodle_url('settings_view.php', array('id' => $courseid, 'show' => 'settings'));
         redirect($url);
     }
 }

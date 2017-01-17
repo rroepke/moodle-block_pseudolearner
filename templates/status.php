@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
     <div class="grid">
         <div class="col_s_100 bp_align_left-middle">
             <div class="pl_align_center">
-                <img class="pl_responsive_img" src="pix/id_card.gif">
-                <img class="pl_responsive_img_small" src="pix/<?php echo $this->_['link']; ?>.gif">
-                <img class="pl_responsive_img" src="pix/course.gif">
+                <img class="pl_responsive_img" src="pix/id_card2.gif" title="<?php echo get_string('status_id_pic', 'block_pseudolearner');?>">
+                <img class="pl_responsive_img_small" src="pix/<?php echo $this->_['link']; ?>.gif"  title="<?php echo get_string('status_'.$this->_['link'], 'block_pseudolearner');?>">
+                <img class="pl_responsive_img" src="pix/course2.gif" title="<?php echo get_string('status_course_pic', 'block_pseudolearner');?>">
             </div>
         </div>
     </div>

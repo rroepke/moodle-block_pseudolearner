@@ -34,13 +34,13 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
     /**
      * block_pseudolearner_communication_handler constructor.
      * @param string $key
-     * @param string $chiffre
+     * @param string $cipher
      * @param string $hash
      * @param int $userid
      * @param int $courseid
      */
-    public function __construct($key, $chiffre, $hash, $userid = null, $courseid = null) {
-        parent::__construct($key, $chiffre, $hash);
+    public function __construct($key, $cipher, $hash, $userid = null, $courseid = null) {
+        parent::__construct($key, $cipher, $hash);
         $this->userid = $userid;
         $this->courseid = $courseid;
     }
@@ -63,12 +63,12 @@ class block_pseudolearner_communication_handler extends CommunicationHandler {
      * @param null $timestamp
      * @return string
      */
-    public function build_request($url, $service, $timestamp = null) {
+    public function build_web_request($url, $service, $username = 'user', $password = 'password', $timestamp = null) {
         if (is_null($timestamp)) {
             $timestamp = time();
         }
 
-        $result = parent::build_request($url, $service, $timestamp);
+        $result = parent::build_web_request($url, $service, $username, $password, $timestamp);
 
         $this->delete_requests();
 

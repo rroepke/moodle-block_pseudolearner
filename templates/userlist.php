@@ -21,6 +21,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $USER;
 ?>
 
 <div class="pl_pad_content">
@@ -34,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
                     <img class="pl_responsive_img_tiny"
                          src="pix/<?php echo ($user->consent) ? 'link_green' : 'link_red'; ?>.gif">
                     <b>
-                        <a href="<?php echo $user->url; ?>"><?php echo fullname($user->user); ?></a>
+                        <a href="<?php echo $user->url; ?>"><?php echo fullname($user->user); ?></a><?php echo (($user->userid == $USER->id)?" ".get_string('userlist_you', 'block_pseudolearner'):""); ?>
                     </b>
 
                 </div>

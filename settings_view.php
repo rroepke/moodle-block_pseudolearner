@@ -65,8 +65,8 @@ if (data_submitted() && confirm_sesskey()) {
 require('navigation.php');
 
 $PAGE->set_url('/blocks/pseudolearner/settings_view.php');
-$PAGE->set_title(format_string("test"));
-$PAGE->set_heading(format_string("test123"));
+$PAGE->set_title(format_string(get_string('page_title_settings', 'block_pseudolearner')));
+$PAGE->set_heading(format_string(get_string('page_title_settings', 'block_pseudolearner')));
 $PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();

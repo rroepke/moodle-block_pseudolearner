@@ -27,15 +27,15 @@ require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_cont
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/view_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/communication_handler.php');
 
-$cipher = required_param('cipher', PARAM_TEXT);
+$ciphertext = required_param('ciphertext', PARAM_TEXT);
 $code = required_param('code', PARAM_TEXT);
 $mac = required_param('mac', PARAM_TEXT);
 
 $url = get_config('pseudolearner', 'url');
 $key = get_config('pseudolearner', 'securitytoken');
-$chiffre = get_config('pseudolearner', 'chiffre');
-if (empty($chiffre)) {
-    $chiffre = 'AES-256-CBC';
+$cipher = get_config('pseudolearner', 'cipher');
+if (empty($cipher)) {
+    $cipher = 'AES-256-CBC';
 }
 if (empty($hash)) {
     $hash = 'sha256';
@@ -44,8 +44,8 @@ $hash = get_config('pseudolearner', 'hash');
 
 $userid = $USER->id;
 
-$comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid);
-$params = $comhandler->decrypt_data($cipher);
+$comhandler = new block_pseudolearner_communication_handler($key, $cipher, $hash, $userid);
+$params = $comhandler->decrypt_data($ciphertext);
 $comhandler->validate_response_params($params, $code);
 $comhandler->verify_hmac($mac, $params);
 
@@ -68,14 +68,14 @@ if ($code == $comhandler::CODE_SUCCESS) {
 
     $courseid = $comhandler->get_courseid_of_last_request();
 
-    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
+    $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym', 'code'=>'success'));
     redirect($url);
 
 } else if ($code == $comhandler::CODE_FAIL) {
 
     $courseid = $comhandler->get_courseid_of_last_request();
 
-    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'view'));
+    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'overview', 'code'=>'danger'));
     redirect($url);
 
 } else {

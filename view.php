@@ -27,7 +27,9 @@ require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_cont
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/view_controller/view_controller.php');
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/util/communication_handler.php');
 
-$courseid = required_param('id', PARAM_INT);
+$id = required_param('id', PARAM_INT);
+
+$courseid = $id;
 $file = basename(__FILE__, '.php');
 $show = optional_param('show', $file, PARAM_TEXT);
 
@@ -67,16 +69,16 @@ if (data_submitted() && confirm_sesskey()) {
     if ($register) {
 
         $key = get_config('pseudolearner', 'securitytoken');
-        $chiffre = get_config('pseudolearner', 'chiffre');
+        $cipher = get_config('pseudolearner', 'cipher');
         $hash = get_config('pseudolearner', 'hash');
-        $comhandler = new block_pseudolearner_communication_handler($key, $chiffre, $hash, $userid, $courseid);
+        $comhandler = new block_pseudolearner_communication_handler($key, $cipher, $hash, $userid, $courseid);
 
         $url = get_config('pseudolearner', 'url');
         $service = get_config('pseudolearner', 'servicename');
         $origin = $PAGE->url->out() . "?id=" . $courseid . "&show=view";
         $timestamp = time();
 
-        $requesturl = $comhandler->build_request($url, $service, $timestamp);
+        $requesturl = $comhandler->build_web_request($url, $service, 'rene','6vVrfhBW');
 
         redirect($requesturl);
     }
@@ -89,6 +91,11 @@ if (data_submitted() && confirm_sesskey()) {
 echo $OUTPUT->header();
 
 require('tabs.php');
+
+$code = optional_param('code', null, PARAM_TEXT);
+if (!is_null($code)){
+    echo '<div class="alert alert-'.$code.'">' . get_string('pseudonym_registration_'.$code, 'block_pseudolearner') . '</div>';
+}
 
 echo $controller->render();
 

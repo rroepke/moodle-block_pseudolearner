@@ -61,7 +61,7 @@ class block_pseudolearner_external extends external_api {
 
         $uc = new block_pseudolearner_user_controller($params['userid']);
 
-        if ($uc->is_registered() && $uc->get_consent($params['courseid'])){
+        if ($uc->is_registered() && $uc->get_consent($params['courseid'])) {
             return $uc->get_pseudonym();
         }
 

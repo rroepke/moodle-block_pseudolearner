@@ -160,7 +160,7 @@ class block_pseudolearner_content_controller {
         // 'Settings' button.
         $text  = "<p>";
         $text .= "<a href=\"";
-        $text .= $this->get_link("settings_view","settings");
+        $text .= $this->get_link("settings_view", "settings");
         $text .= "\">";
         $text .= "<button class=\"btn btn-default\">";
         $text .= get_string("settings");

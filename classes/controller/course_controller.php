@@ -55,13 +55,13 @@ class block_pseudolearner_course_controller {
     public function get_users() {
         global $DB;
 
-        $enrolled_users = get_enrolled_users($this->context);
+        $enrolledusers = get_enrolled_users($this->context);
         $records = $DB->get_records($this->usercoursetable, array('courseid' => $this->courseid));
 
-        foreach($records as $record){
+        foreach ($records as $record) {
             $url = new moodle_url('/user/profile.php', array('id' => $record->userid));
             $record->url = $url->out();
-            $record->user = $enrolled_users[$record->userid];
+            $record->user = $enrolledusers[$record->userid];
         }
 
         return $records;
@@ -77,7 +77,7 @@ class block_pseudolearner_course_controller {
 
         // iterate over all users
         foreach ($users as $user) {
-            $uc = new block_pseudolearner_user_controller($user->userid,$this->courseid);
+            $uc = new block_pseudolearner_user_controller($user->userid, $this->courseid);
             $uc->set_consent($consent);
         }
     }

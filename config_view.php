@@ -50,7 +50,7 @@ $controller = new block_pseudolearner_settings_controller($courseid, $uc);
 if (data_submitted() && confirm_sesskey()) {
     $save = optional_param('save', false, PARAM_BOOL);
 
-    // Handle configuration saving
+    // Handle configuration save.
     if ($save) {
         $controller->save();
     }

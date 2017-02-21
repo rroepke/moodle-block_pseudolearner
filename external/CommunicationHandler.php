@@ -135,7 +135,7 @@ class CommunicationHandler {
      */
     public function build_response($url, $code, $timestamp = null, $pseudonym = null) {
 
-        $array = $this->get_response_params($code,$timestamp,$pseudonym);
+        $array = $this->get_response_params($code, $timestamp, $pseudonym);
 
         $query = http_build_query($array);
 

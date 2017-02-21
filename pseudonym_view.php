@@ -73,7 +73,7 @@ echo $OUTPUT->header();
 require('tabs.php');
 
 $code = optional_param('code', null, PARAM_TEXT);
-if (!is_null($code)){
+if (!is_null($code)) {
     echo '<div class="alert alert-'.$code.'">' . get_string('pseudonym_registration_'.$code, 'block_pseudolearner') . '</div>';
 }
 

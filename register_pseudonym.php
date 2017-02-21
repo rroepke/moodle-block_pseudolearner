@@ -61,19 +61,19 @@ if ($code == $comhandler::CODE_SUCCESS) {
     $pseudonym = $params->pseudonym;
 
     $usercontroller = new block_pseudolearner_user_controller($userid);
-    
+
     $usercontroller->register_pseudonym($pseudonym);
 
     $courseid = $comhandler->get_courseid_of_last_request();
 
-    $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym', 'code'=>'success'));
+    $url = new moodle_url('pseudonym_view.php', array('id' => $courseid, 'show' => 'pseudonym', 'code' => 'success'));
     redirect($url);
 
 } else if ($code == $comhandler::CODE_FAIL) {
 
     $courseid = $comhandler->get_courseid_of_last_request();
 
-    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'overview', 'code'=>'danger'));
+    $url = new moodle_url('view.php', array('id' => $courseid, 'show' => 'overview', 'code' => 'danger'));
     redirect($url);
 
 } else {

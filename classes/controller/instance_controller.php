@@ -59,7 +59,6 @@ class block_pseudolearner_instance_controller {
         global $DB;
 
         $record = $DB->get_record($this->tablename, array('courseid' => $this->courseid));
-
         $record->configured = $configured;
 
         $DB->update_record($this->tablename, $record);

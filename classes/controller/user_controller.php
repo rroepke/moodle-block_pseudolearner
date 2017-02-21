@@ -157,6 +157,7 @@ class block_pseudolearner_user_controller {
      */
     public function get_consent($courseid = null) {
         global $DB;
+
         if ($DB->record_exists($this->usercoursetable, array(
             'userid' => $this->userid,
             'courseid' => ((is_null($courseid)) ? $this->courseid : $courseid)
@@ -259,6 +260,7 @@ class block_pseudolearner_user_controller {
 
         $courses = array();
 
+        // Prep courses.
         foreach ($allcourses as $course) {
             $instancecontroller = new block_pseudolearner_instance_controller($course->id);
             if ($instancecontroller->is_activated()) {

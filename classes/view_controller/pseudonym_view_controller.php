@@ -44,6 +44,7 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
         $registered = $this->controller->is_registered();
 
         if ($registered) {
+
             // Pseudonym registered.
             $button = array('caption' => get_string('button_caption_delete_pseudonym', 'block_pseudolearner'),
                 'value' => 1,
@@ -72,10 +73,13 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
         $timestamp = $this->controller->get_registered_time();
 
         if ('en' == get_string('language', 'block_pseudolearner')) {
+
             $format = 'F j, Y, g:i a';
             $trans = array();
             $timestamp = strtr(date($format, $timestamp), $trans);
+
         } else if ('de' == get_string('language', 'block_pseudolearner')) {
+
             $format = 'd.m.y, H:m';
             $trans = array(
                 'Monday' => 'Montag',
@@ -102,6 +106,7 @@ class block_pseudolearner_pseudonym_view_controller extends block_pseudolearner_
                 'December' => 'Dezember'
             );
             $timestamp = strtr(date($format, $timestamp), $trans) . ' Uhr';
+
         }
 
         $template->assign('date_registered', $timestamp);

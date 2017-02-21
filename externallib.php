@@ -55,7 +55,7 @@ class block_pseudolearner_external extends external_api {
      */
     public static function get_pseudonym($userid, $courseid) {
 
-        //Parameters validation
+        // Parameters validation.
         $params = self::validate_parameters(self::get_pseudonym_parameters(),
             array('userid' => $userid, 'courseid' => $courseid));
 
@@ -97,7 +97,7 @@ class block_pseudolearner_external extends external_api {
      */
     public static function has_consent($userid, $courseid) {
 
-        //Parameters validation
+        // Parameters validation.
         $params = self::validate_parameters(self::get_pseudonym_parameters(),
             array('userid' => $userid, 'courseid' => $courseid));
 
@@ -133,7 +133,7 @@ class block_pseudolearner_external extends external_api {
      */
     public static function is_registered($userid) {
 
-        //Parameters validation
+        // Parameters validation.
         $params = self::validate_parameters(self::is_registered_parameters(),
             array('userid' => $userid));
 

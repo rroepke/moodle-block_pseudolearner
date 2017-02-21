@@ -75,6 +75,7 @@ class block_pseudolearner_course_controller {
     public function set_consent_for_all($consent) {
         $users = $this->get_users();
 
+        // iterate over all users
         foreach ($users as $user) {
             $uc = new block_pseudolearner_user_controller($user->userid,$this->courseid);
             $uc->set_consent($consent);

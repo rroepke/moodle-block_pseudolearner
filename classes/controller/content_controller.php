@@ -24,7 +24,6 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
 
-
 class block_pseudolearner_content_controller {
 
     /** @var int ID of course */
@@ -77,7 +76,7 @@ class block_pseudolearner_content_controller {
      * @param $page
      * @return string
      */
-    public function get_link($page,$show = 'view') {
+    public function get_link($page, $show = 'view') {
         $url = new moodle_url("/blocks/pseudolearner/" . $page . ".php",
             array("id" => $this->courseid, 'show' => $show));
         return $url->out();
@@ -98,6 +97,7 @@ class block_pseudolearner_content_controller {
 
         $text = "";
 
+        // Pseudonym registration info.
         $text .= "<p>";
         $text .= get_string('content_pseudonym', 'block_pseudolearner');
         $text .= "<br>";
@@ -112,9 +112,9 @@ class block_pseudolearner_content_controller {
 
         $text .= "</span>";
         $text .= "<br>";
-
         $text .= "</p>";
 
+        // Pseudonymous tracking info.
         $text .= "<p>";
         $text .= get_string('content_anonymous_tracking', 'block_pseudolearner');
         $text .= "<br>";
@@ -128,9 +128,9 @@ class block_pseudolearner_content_controller {
         }
         $text .= "</span>";
         $text .= "<br>";
-
         $text .= "</p>";
 
+        // 'View' .
         $text .= "<p>";
         $text .= "<a href=\"";
         $text .= $this->get_link("view");
@@ -146,60 +146,18 @@ class block_pseudolearner_content_controller {
         return $content;
     }
 
+    /**
+     * Returns content for teacher
+     *
+     * @param $userid
+     * @param $content
+     * @return mixed
+     */
     private function get_teacher_content($userid, $content) {
 
         $content = $this->get_user_content($userid, $content);
 
-//        $uc = new block_pseudolearner_user_controller($userid, $this->courseid);
-//
-//        $pseudonym = $uc->is_registered();
-//        $consent = $uc->get_consent();
-//
-//        $text = "";
-//
-//        $text .= "<p>";
-//        $text .= get_string('content_pseudonym', 'block_pseudolearner');
-//        $text .= "<br>";
-//        $text .= "<span class=\"label label-";
-//        $text .= ($pseudonym ? "success" : "default");
-//        $text .= "\">";
-//        if ($pseudonym) {
-//            $text .= get_string('content_registered', 'block_pseudolearner');
-//        } else {
-//            $text .= get_string('content_notregistered', 'block_pseudolearner');
-//        }
-//
-//        $text .= "</span>";
-//        $text .= "<br>";
-//
-//        $text .= "</p>";
-//
-//        $text .= "<p>";
-//        $text .= get_string('content_anonymous_tracking', 'block_pseudolearner');
-//        $text .= "<br>";
-//        $text .= "<span class=\"label label-";
-//        $text .= ($consent ? "success" : "default");
-//        $text .= "\">";
-//        if ($consent) {
-//            $text .= get_string('content_activated', 'block_pseudolearner');
-//        } else {
-//            $text .= get_string('content_notactivated', 'block_pseudolearner');
-//        }
-//        $text .= "</span>";
-//        $text .= "<br>";
-//
-//        $text .= "</p>";
-//
-//        $footer = "<p>";
-//        $footer .= "<a href=\"";
-//        $footer .= $this->get_link("view");
-//        $footer .= "\">";
-//        $footer .= "<button class=\"btn btn-default\">";
-//        $footer .= get_string("view");
-//        $footer .= "</button>";
-//        $footer .= "</a>";
-//        $footer .= "</p>";
-
+        // 'Settings' button.
         $text  = "<p>";
         $text .= "<a href=\"";
         $text .= $this->get_link("settings_view","settings");

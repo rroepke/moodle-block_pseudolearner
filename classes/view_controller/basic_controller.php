@@ -65,6 +65,7 @@ abstract class block_pseudolearner_basic_controller {
 
         $templates = array();
 
+        // Set templates.
         foreach ($this->templatenames as $templatename) {
             $call = 'render_' . $templatename;
             $template = $this->$call();

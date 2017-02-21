@@ -32,6 +32,7 @@ if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
 }
 
+// Course login required to enter this page.
 require_course_login($course);
 
 $userid = $USER->id;
@@ -49,6 +50,7 @@ $controller = new block_pseudolearner_settings_controller($courseid, $uc);
 if (data_submitted() && confirm_sesskey()) {
     $save = optional_param('save', false, PARAM_BOOL);
 
+    // Handle configuration saving
     if ($save) {
         $controller->save();
     }
@@ -57,6 +59,7 @@ if (data_submitted() && confirm_sesskey()) {
     redirect($url);
 }
 
+// Set page details.
 $PAGE->set_url('/blocks/pseudolearner/config_view.php');
 $PAGE->set_title(format_string("test"));
 $PAGE->set_heading(format_string("test123"));

@@ -36,6 +36,7 @@ if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
 }
 
+// Course login required to enter this page.
 require_course_login($course);
 
 $userid = $USER->id;
@@ -61,6 +62,7 @@ if (data_submitted() && confirm_sesskey()) {
     redirect($url);
 }
 
+// Set page details.
 $PAGE->set_url('/blocks/pseudolearner/pseudonym_view.php');
 $PAGE->set_title(format_string(get_string('page_title_pseudonym', 'block_pseudolearner')));
 $PAGE->set_heading(format_string(get_string('page_title_pseudonym', 'block_pseudolearner')));

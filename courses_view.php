@@ -36,6 +36,7 @@ if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
 }
 
+// Course login required to enter this page.
 require_course_login($course);
 
 $userid = $USER->id;
@@ -51,6 +52,7 @@ if (data_submitted() && confirm_sesskey()) {
 
     $courses = $usercontroller->get_courses();
 
+    // Iterate over courses.
     foreach ($courses as $course) {
         $consent = optional_param('consent_' . $course->id, null, PARAM_TEXT);
 
@@ -65,6 +67,7 @@ if (data_submitted() && confirm_sesskey()) {
 
     $consent = optional_param('consent', null, PARAM_TEXT);
 
+    // Handle consent button click.
     if (!is_null($consent)) {
         if ($consent == 'withdraw') {
             $usercontroller->set_consent_for_all(false);
@@ -77,6 +80,7 @@ if (data_submitted() && confirm_sesskey()) {
     redirect($url);
 }
 
+// Set page details.
 $PAGE->set_url('/blocks/pseudolearner/courses_view.php');
 $PAGE->set_title(format_string(get_string('page_title_courses', 'block_pseudolearner')));
 $PAGE->set_heading(format_string(get_string('page_title_courses', 'block_pseudolearner')));

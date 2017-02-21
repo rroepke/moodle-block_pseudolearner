@@ -48,6 +48,7 @@ if (has_capability('moodle/block:edit', $context)) {
     $row [] = new tabobject ('settings', $viewurl->out(), get_string('page_title_settings', 'block_pseudolearner'));
 
 }
+
 if (count($row) >= 1) {
     $tabs [] = $row;
     print_tabs($tabs, $currenttab, $inactive, $activated);

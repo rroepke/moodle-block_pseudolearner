@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Class CommunicationHandler
  *

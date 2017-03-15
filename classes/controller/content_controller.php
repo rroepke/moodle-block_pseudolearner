@@ -136,7 +136,7 @@ class block_pseudolearner_content_controller {
         $text .= $this->get_link("view");
         $text .= "\">";
         $text .= "<button class=\"btn btn-default\">";
-        $text .= get_string("view");
+        $text .= get_string("show");
         $text .= "</button>";
         $text .= "</a>";
         $text .= "</p>";

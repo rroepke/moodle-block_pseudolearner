@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir."/externallib.php");
-require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/user_controller.php');
+require_once(dirname(dirname(dirname(__FILE__))) . "/lib/externallib.php");
+require_once(dirname(__FILE__) . '/classes/controller/user_controller.php');
 
 /**
  * Pseudolearner functions

@@ -23,7 +23,7 @@
 
 $string['blockstring'] = 'Block string';
 $string['config_header'] = 'Pseudonymity Provider';
-$string['config_description'] = 'In order to register a pseudonym a Pseudonymity Provider needs to be configured.';
+$string['config_description'] = 'Before configuring the Pseudonymity Provider, this Moodle instance needs to be registered at the Pseudonymity Provider. When registering this Moodle instance the following Return URL should be used: <p style="margin-left:1em;"><b>{$a->url}</b></p>Now the respective settings given by the Pseudonymity Provider need to be configured in what follows.';
 $string['config_label_url'] = 'URL';
 $string['config_description_url'] = 'URL to redirect to, if users want to register a pseudonym';
 $string['config_label_servicename'] = 'Service Name';

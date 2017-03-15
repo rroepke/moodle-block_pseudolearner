@@ -24,10 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$a = new stdClass();
+
+$url = new moodle_url('/blocks/pseudolearner/register_pseudonym.php');
+$a->url = $url->out();
 
 $settings->add(new admin_setting_heading('sampleheader',
                                          get_string('config_header', 'block_pseudolearner'),
-                                         get_string('config_description', 'block_pseudolearner')));
+                                         get_string('config_description', 'block_pseudolearner', $a)));
 
 $settings->add(new admin_setting_configtext('pseudolearner/servicename',
     get_string('config_label_servicename', 'block_pseudolearner'),

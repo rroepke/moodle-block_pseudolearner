@@ -48,6 +48,12 @@ $controller = new block_pseudolearner_view_controller($courseid, $usercontroller
 
 require('navigation.php');
 
+// Set page details.
+$PAGE->set_url(new moodle_url('/blocks/pseudolearner/view.php'));
+$PAGE->set_title(format_string(get_string('page_title_view', 'block_pseudolearner')));
+$PAGE->set_heading(format_string(get_string('page_title_view', 'block_pseudolearner')));
+$PAGE->set_pagelayout('standard');
+
 // Handle submitted values and perform fitting actions.
 if (data_submitted() && confirm_sesskey()) {
     $consent = optional_param('consent', null, PARAM_TEXT);
@@ -84,11 +90,7 @@ if (data_submitted() && confirm_sesskey()) {
     redirect($url);
 }
 
-// Set page details.
-$PAGE->set_url('/blocks/pseudolearner/view.php');
-$PAGE->set_title(format_string(get_string('page_title_view', 'block_pseudolearner')));
-$PAGE->set_heading(format_string(get_string('page_title_view', 'block_pseudolearner')));
-$PAGE->set_pagelayout('standard');
+
 
 echo $OUTPUT->header();
 
